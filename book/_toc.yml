@@ -6,7 +6,7 @@ root: intro
 parts:
   - caption: Notebooks
     chapters:
-    - file: notebooks/00-Tutorial_Python_Brasil_2020.ipynb
+    - file: notebooks/00-Tutorial_Python_Sul_2024.ipynb
     - file: notebooks/01-Tutorial_NumPy.ipynb
     - file: notebooks/02-Tutorial_Matplotlib.ipynb
     - file: notebooks/03-Exemplo_Masked_Arrays.ipynb
