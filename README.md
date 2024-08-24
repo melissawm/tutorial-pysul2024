@@ -1,5 +1,7 @@
 # Introdução ao Python Científico e para Data Science
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/melissawm/tutorial-pysul2024/HEAD)
+
 Tutorial curto (3h) ministrado na Python Sul 2024.
 
 ## Resumo
