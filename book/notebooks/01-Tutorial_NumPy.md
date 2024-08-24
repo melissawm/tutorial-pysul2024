@@ -5,9 +5,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
@@ -646,7 +646,7 @@ np.allclose(np.sin(x), np.zeros(np.shape(x)))
 ---
 
 
-### Basic Indexing, Fancy Indexing
+### Basic Indexing, Advanced (Fancy) Indexing
 
 ```python
 x = np.arange(10)
@@ -782,9 +782,9 @@ print(np.__doc__)
 ---
 
 
-[Voltar ao notebook principal](00-Tutorial_Python_Brasil_2020.ipynb)
+[Voltar ao notebook principal](00-Tutorial_Python_Sul_2024.md)
 
-[Ir para o notebook Matplotlib](02-Tutorial_Matplotlib.ipynb)
+[Ir para o notebook Matplotlib](02-Tutorial_Matplotlib.md)
 
 ```python
 

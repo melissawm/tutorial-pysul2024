@@ -7,7 +7,7 @@ jupyter:
       format_version: '1.3'
       jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
@@ -24,7 +24,7 @@ Dados da NASA: https://firms.modaps.eosdis.nasa.gov/
 ```
 
 ```python
-zipfile_inpe = "Focos_BDQueimadas.zip"
+zipfile_inpe = "dados/Focos_BDQueimadas.zip"
 ```
 
 ```python
@@ -206,9 +206,9 @@ ax2.set_ylabel('Dias sem chuva')
 fig.tight_layout()
 ```
 
-[Voltar ao notebook principal](00-Tutorial_Python_Brasil_2020.ipynb)
+[Voltar ao notebook principal](00-Tutorial_Python_Sul_2024.md)
 
-[Ir para o notebook SciPy](06-Tutorial_SciPy.ipynb)
+[Ir para o notebook SciPy](06-Tutorial_SciPy.md)
 
 ```python
 

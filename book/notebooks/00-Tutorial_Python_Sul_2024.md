@@ -7,7 +7,7 @@ jupyter:
       format_version: '1.3'
       jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
@@ -23,11 +23,6 @@ import matplotlib as mpl
 <!-- #endregion -->
 
 ---
-
-```python
-#! cp /home/shared/tutorial.zip .
-#! unzip tutorial.zip
-```
 
 <!-- #region tags=["chapter"] -->
 ## Introdução
@@ -119,32 +114,25 @@ Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.
 <!-- #endregion -->
 
 <!-- #region -->
-- [Parte 1. NumPy](01-Tutorial_NumPy.ipynb)
+- [Parte 1. NumPy](01-Tutorial_NumPy.md)
 
 
-- [Parte 2. Matplotlib](02-Tutorial_Matplotlib.ipynb)
+- [Parte 2. Matplotlib](02-Tutorial_Matplotlib.md)
 
 
 - Parte 3. Exemplos práticos
 
-    - [Arrays com máscara (masked arrays)](03-Exemplo_Masked_Arrays.ipynb)
-    - [Aproximação de imagens usando a SVD](04-Exemplo_SVD.ipynb)
-    - [Queimadas](05-Exemplo_Queimadas.ipynb)
+    - [Arrays com máscara (masked arrays)](03-Exemplo_Masked_Arrays.md)
+    - [Aproximação de imagens usando a SVD](04-Exemplo_SVD.md)
+    - [Queimadas](05-Exemplo_Queimadas.md)
 
 
-- [Parte 4. SciPy](06-Tutorial_SciPy.ipynb)
-    - [Regressão](07-Exemplo_Regressao.ipynb)
+- [Parte 4. SciPy](06-Tutorial_SciPy.md)
+    - [Regressão](07-Exemplo_Regressao.md)
     
 <!-- #endregion -->
 
 ---
-
-
-## Para terminar...
-
-```python
-Image(url="https://pics.me.me/lee-lee-dibango-pmishraworld-math-problem-2-2-me-import-numpy-35881429.png", width=600)
-```
 
 <!-- #region tags=["chapter"] -->
 ## Outras ferramentas
@@ -168,7 +156,7 @@ Algumas referências interessantes e caminhos para mais informações além da d
 
 
 - [From Python to NumPy](https://github.com/rougier/from-python-to-numpy), livro aberto de Nicolas Rougier.
-- [SciPy Lecture Notes](https://scipy-lectures.org/)
+- [Scientific Python Lectures](https://lectures.scientific-python.org/)
 - [Elegant SciPy](https://github.com/elegant-scipy/elegant-scipy), livro aberto de Juan Nunez-Iglesias, Harriet Dashnow and Stéfan van der Walt (também publicado pela O'Reilly)
 
 <!-- #region tags=["chapter"] -->

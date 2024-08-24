@@ -2,6 +2,7 @@ jupyter-book
 matplotlib
 numpy
 scipy
+pandas
 ipympl
 jupyterlab
 jupytext

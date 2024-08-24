@@ -4,13 +4,15 @@
 format: jb-book
 root: intro
 parts:
+  - caption: Introdução
+    chapters:
+    - file: notebooks/00-Tutorial_Python_Sul_2024.md
   - caption: Notebooks
     chapters:
-    - file: notebooks/00-Tutorial_Python_Sul_2024.ipynb
-    - file: notebooks/01-Tutorial_NumPy.ipynb
-    - file: notebooks/02-Tutorial_Matplotlib.ipynb
-    - file: notebooks/03-Exemplo_Masked_Arrays.ipynb
-    - file: notebooks/04-Exemplo_SVD.ipynb
-    - file: notebooks/05-Exemplo_Queimadas.ipynb
-    - file: notebooks/06-Tutorial_SciPy.ipynb
-    - file: notebooks/07-Exemplo_Regressao.ipynb
+    - file: notebooks/01-Tutorial_NumPy.md
+    - file: notebooks/02-Tutorial_Matplotlib.md
+    - file: notebooks/03-Exemplo_Masked_Arrays.md
+    - file: notebooks/04-Exemplo_SVD.md
+    - file: notebooks/05-Exemplo_Queimadas.md
+    - file: notebooks/06-Tutorial_SciPy.md
+    - file: notebooks/07-Exemplo_Regressao.md

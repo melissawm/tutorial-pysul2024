@@ -24,3 +24,7 @@ html:
   use_repository_button: true
   favicon: logo-header.png
 
+sphinx:
+  config:
+    language: pt
+ 
