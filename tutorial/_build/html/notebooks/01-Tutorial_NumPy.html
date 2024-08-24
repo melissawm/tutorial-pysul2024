@@ -1,0 +1,2556 @@
+
+<!DOCTYPE html>
+
+
+<html lang="pt" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>NumPy: a base da computação científica no Python &#8212; Tutorial Python Brasil 2020</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=0ff6c57f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=5f54a428"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/01-Tutorial_NumPy';</script>
+    <link rel="icon" href="../_static/logo-header.png"/>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Pesquisar" href="../search.html" />
+    <link rel="next" title="Matplotlib: figurinhas maneiras" href="02-Tutorial_Matplotlib.html" />
+    <link rel="prev" title="O Ecossistema Científico no Python" href="00-Tutorial_Python_Sul_2024.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/python-sul.svg" class="logo__image only-light" alt="Tutorial Python Brasil 2020 - Home"/>
+    <script>document.write(`<img src="../_static/python-sul.svg" class="logo__image only-dark" alt="Tutorial Python Brasil 2020 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Pesquisar" aria-label="Pesquisar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Pesquisar</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introdução ao Python Científico e para Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introdução</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Tutorial_Python_Sul_2024.html">O Ecossistema Científico no Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">NumPy: a base da computação científica no Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-Tutorial_Matplotlib.html">Matplotlib: figurinhas maneiras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Exemplo_Masked_Arrays.html">Exemplo: Arrays com Máscara</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Exemplo_SVD.html">Tutorial: Álgebra Linear em arrays n-dimensionais</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-Exemplo_Queimadas.html">Queimadas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Tutorial_SciPy.html">SciPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-Exemplo_Regressao.html">Exemplo: Regressão usando 3 métodos</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/melissawm/tutorial-pysul2024" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositório fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/melissawm/tutorial-pysul2024/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01-Tutorial_NumPy.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abra um problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/01-Tutorial_NumPy.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Baixar arquivo fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir em PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo tela cheia"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Pesquisar" aria-label="Pesquisar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NumPy: a base da computação científica no Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Conteúdo </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-e-a-numpy">O que é a NumPy?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-nao-usar-listas">Por que não usar listas?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alguns-exemplos">Alguns exemplos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-o-modulo-array">E o módulo array?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#como-isso-acontece">Como isso acontece?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vetorizacao">Vetorização</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vetorizacao-exemplo-1">Vetorização: Exemplo 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nota-onde-estao-implementadas-as-funcoes-do-numpy">Nota: onde estão implementadas as funções do NumPy?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuidado">Cuidado!</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vetorizacao-exemplo-2">Vetorização: Exemplo 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-sao-essas-dimensoes">❓ (O que são essas dimensões?)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vetorizacao-exemplo-3">Vetorização: Exemplo 3</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">📒 Exercícios</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-1">Exercício 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solucao-1">Solução 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solucao-2">Solução 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solucao-3">Solução 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-2">Exercício 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-3">Exercício 3</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operacoes-vetorizadas-e-pontos-flutuantes">Operações vetorizadas e pontos flutuantes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#observacao">⚠️⚠️ Observação</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacao">Explicação</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-indexing-advanced-fancy-indexing">Basic Indexing, Advanced (Fancy) Indexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercícios</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#criar-um-array-aleatorio-de-tamanho-12-e-substituir-o-menor-valor-por-999">Criar um array aleatório de tamanho 12 e substituir o menor valor por -999.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ordenar-uma-array-pela-n-esima-coluna">Ordenar uma array pela n-ésima coluna</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#como-saber-se-uma-array-2d-tem-colunas-nulas">Como saber se uma array 2D tem colunas nulas?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trocar-duas-linhas-de-uma-matriz">Trocar duas linhas de uma matriz</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submodulos">2.4 Submódulos</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;imagens/numpylogo.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../_images/e8093bc3da6e574cee1eed726a72753d885a27cd147439c2bb0f91fb24402a20.png"><img alt="../_images/e8093bc3da6e574cee1eed726a72753d885a27cd147439c2bb0f91fb24402a20.png" src="../_images/e8093bc3da6e574cee1eed726a72753d885a27cd147439c2bb0f91fb24402a20.png" style="width: 600px;" /></a>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="numpy-a-base-da-computacao-cientifica-no-python">
+<h1>NumPy: a base da computação científica no Python<a class="headerlink" href="#numpy-a-base-da-computacao-cientifica-no-python" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="o-que-e-a-numpy">
+<h2>O que é a NumPy?<a class="headerlink" href="#o-que-e-a-numpy" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>A computação com arrays é a base para estatística e matemática computacionais, computação científica e suas várias aplicações em ciência e análise de dados, tais como visualização de dados, processamento de sinais digitais, processamento de imagens, bioinformática, aprendizagem de máquina, IA e muitas outras.</p>
+<p>A manipulação e a transformação de dados de grande escala dependem de computação eficiente de alta performance com arrays. A linguagem mais escolhida para análise de dados, aprendizagem de máquina e computação numérica produtiva é Python.</p>
+<p>Numerical Python (Python Numérico) ou NumPy é a biblioteca em Python padrão para o suporte à utilização de matrizes e arrays  multidimensionais de grande porte, e vem com uma vasta coleção de funções matemáticas de alto nível para operar nestas arrays.</p>
+<p>Desde o lançamento do NumPy em 2006, o Pandas apareceu em 2008, e nos últimos anos vimos uma sucessão de bibliotecas de computação com arrays aparecerem, ocupando e preenchendo o campo da computação com arrays. Muitas dessas bibliotecas mais recentes imitam recursos e capacidades parecidas com o NumPy e entregam algoritmos e recursos mais recentes voltados para aplicações de aprendizagem de máquina e inteligência artificial.</p>
+<p>A computação com arrays é baseada em estruturas de dados chamadas arrays. Arrays são usadas para organizar grandes quantidades de dados de forma que um conjunto de valores relacionados possa ser facilmente ordenado, obtido, matematicamente manipulado e transformado fácil e rapidamente.</p>
+<p>A computação com arrays é única pois envolve operar nos valores de um array de dados de uma vez. Isso significa que qualquer operação de array se aplica a todo um conjunto de valores de uma só vez. Esta abordagem vetorizada fornece velocidade e simplicidade por permitir que os programadores organizem o código e operem em agregados de dados, sem ter que usar laços com operações escalares individuais.</p>
+</div></blockquote>
+<p>(Fonte: <a class="reference external" href="https://numpy.org">https://numpy.org</a>)</p>
+<p>A biblioteca NumPy consiste em:</p>
+<ul class="simple">
+<li><p>objeto <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> (array homogêneo n-dimensional)</p></li>
+<li><p>capacidade de <strong>broadcasting</strong></p></li>
+<li><p>funções matemáticas padrão com capacidade de vetorização</p></li>
+<li><p>ferramentas para a integração de código C/C++ e Fortran</p></li>
+<li><p>álgebra linear, transformadas de Fourier, gerador de números aleatórios</p></li>
+</ul>
+<hr class="docutils" />
+<section id="por-que-nao-usar-listas">
+<h3>Por que não usar listas?<a class="headerlink" href="#por-que-nao-usar-listas" title="Link to this heading">#</a></h3>
+<p>Uma lista em Python é às vezes vista como equivalente de um <em>array</em> em outras linguagens, mas uma lista é mutável e pode conter elementos de tipos diferentes.</p>
+<p>Quando uma array de fato contém elementos de um só tipo, temos algumas vantagens:</p>
+<ul class="simple">
+<li><p>Tamanho</p></li>
+<li><p>Desempenho</p></li>
+<li><p>Funcionalidades específicas</p></li>
+</ul>
+<p>🎈 Link interessante: <a class="reference external" href="https://webcourses.ucf.edu/courses/1249560/pages/python-lists-vs-numpy-arrays-what-is-the-difference">https://webcourses.ucf.edu/courses/1249560/pages/python-lists-vs-numpy-arrays-what-is-the-difference</a></p>
+<section id="alguns-exemplos">
+<h4>Alguns exemplos<a class="headerlink" href="#alguns-exemplos" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10_000_000</span>
+<span class="n">v</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">w</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(list, list)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> v + w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>174 ms ± 154 μs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="n">w_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">v_np</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">w_np</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(numpy.ndarray, numpy.ndarray)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_np</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">w_np</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(dtype(&#39;int64&#39;), dtype(&#39;float64&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_np</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10000000,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_np</span><span class="o">.</span><span class="n">size</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_np</span><span class="o">.</span><span class="n">nbytes</span><span class="o">/</span><span class="n">v_np</span><span class="o">.</span><span class="n">size</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> v_np + w_np
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.6 ms ± 32.8 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="e-o-modulo-array">
+<h4>E o módulo array?<a class="headerlink" href="#e-o-modulo-array" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">array</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_arr</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">w_arr</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_arr</span><span class="o">.</span><span class="n">typecode</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;d&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> v_arr + w_arr
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26.5 ms ± 287 μs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>🎈 Link interessante: <a class="reference external" href="https://medium.com/&#64;gough.cory/performance-of-numpy-array-vs-python-list-194c8e283b65">https://medium.com/&#64;gough.cory/performance-of-numpy-array-vs-python-list-194c8e283b65</a></p>
+</section>
+<section id="como-isso-acontece">
+<h4>Como isso acontece?<a class="headerlink" href="#como-isso-acontece" title="Link to this heading">#</a></h4>
+<p>As arrays do NumPy são eficientes porque</p>
+<ul class="simple">
+<li><p>são compatíveis com as rotinas de álgebra linear escritas em C/C++ ou Fortran</p></li>
+<li><p>são <em>views</em> de objetos alocados por C/C++, Fortran e Cython</p></li>
+<li><p>as operações vetorizadas em geral evitam copiar arrays desnecessariamente</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://media.springernature.com/full/springer-static/image/art%3A10.1038</span><span class="si">%2F</span><span class="s2">s41586-020-2649-2/MediaObjects/41586_2020_2649_Fig1_HTML.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-020-2649-2/MediaObjects/41586_2020_2649_Fig1_HTML.png" width="600"/></div></div>
+</div>
+<p><em>Fonte: Harris et al., «Array Programming with NumPy», Nature volume 585, pages 357–362 (2020)</em></p>
+<!-- #region tags=["section"] -->
+</section>
+</section>
+</section>
+<section id="vetorizacao">
+<h2>Vetorização<a class="headerlink" href="#vetorizacao" title="Link to this heading">#</a></h2>
+<!-- #endregion -->
+<p>Vetorização é a capacidade de expressar operações em arrays sem especificar o que acontece com cada elemento individual (em outras palavras: sem usar loops!)</p>
+<ul class="simple">
+<li><p>Código vetorizado é mais conciso e legível</p></li>
+<li><p>O código fica (ligeiramente) mais parecido com a notação matemática</p></li>
+<li><p>Mais rápido (usa operações otimizadas em C/Fortran)</p></li>
+</ul>
+<section id="vetorizacao-exemplo-1">
+<h3>Vetorização: Exemplo 1<a class="headerlink" href="#vetorizacao-exemplo-1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1,  4,  9, 16])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1,  4,  9, 16])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(20.5)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="nota-onde-estao-implementadas-as-funcoes-do-numpy">
+<h4>Nota: onde estão implementadas as funções do NumPy?<a class="headerlink" href="#nota-onde-estao-implementadas-as-funcoes-do-numpy" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    dot(a, b, out=None)
+
+    Dot product of two arrays. Specifically,
+
+    - If both `a` and `b` are 1-D arrays, it is inner product of vectors
+      (without complex conjugation).
+
+    - If both `a` and `b` are 2-D arrays, it is matrix multiplication,
+      but using :func:`matmul` or ``a @ b`` is preferred.
+
+    - If either `a` or `b` is 0-D (scalar), it is equivalent to
+      :func:`multiply` and using ``numpy.multiply(a, b)`` or ``a * b`` is
+      preferred.
+
+    - If `a` is an N-D array and `b` is a 1-D array, it is a sum product over
+      the last axis of `a` and `b`.
+
+    - If `a` is an N-D array and `b` is an M-D array (where ``M&gt;=2``), it is a
+      sum product over the last axis of `a` and the second-to-last axis of
+      `b`::
+
+        dot(a, b)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])
+
+    It uses an optimized BLAS library when possible (see `numpy.linalg`).
+
+    Parameters
+    ----------
+    a : array_like
+        First argument.
+    b : array_like
+        Second argument.
+    out : ndarray, optional
+        Output argument. This must have the exact kind that would be returned
+        if it was not used. In particular, it must have the right type, must be
+        C-contiguous, and its dtype must be the dtype that would be returned
+        for `dot(a,b)`. This is a performance feature. Therefore, if these
+        conditions are not met, an exception is raised, instead of attempting
+        to be flexible.
+
+    Returns
+    -------
+    output : ndarray
+        Returns the dot product of `a` and `b`.  If `a` and `b` are both
+        scalars or both 1-D arrays then a scalar is returned; otherwise
+        an array is returned.
+        If `out` is given, then it is returned.
+
+    Raises
+    ------
+    ValueError
+        If the last dimension of `a` is not the same size as
+        the second-to-last dimension of `b`.
+
+    See Also
+    --------
+    vdot : Complex-conjugating dot product.
+    tensordot : Sum products over arbitrary axes.
+    einsum : Einstein summation convention.
+    matmul : &#39;@&#39; operator as method with out parameter.
+    linalg.multi_dot : Chained dot product.
+
+    Examples
+    --------
+    &gt;&gt;&gt; import numpy as np
+    &gt;&gt;&gt; np.dot(3, 4)
+    12
+
+    Neither argument is complex-conjugated:
+
+    &gt;&gt;&gt; np.dot([2j, 3j], [2j, 3j])
+    (-13+0j)
+
+    For 2-D arrays it is the matrix product:
+
+    &gt;&gt;&gt; a = [[1, 0], [0, 1]]
+    &gt;&gt;&gt; b = [[4, 1], [2, 2]]
+    &gt;&gt;&gt; np.dot(a, b)
+    array([[4, 1],
+           [2, 2]])
+
+    &gt;&gt;&gt; a = np.arange(3*4*5*6).reshape((3,4,5,6))
+    &gt;&gt;&gt; b = np.arange(3*4*5*6)[::-1].reshape((5,4,6,3))
+    &gt;&gt;&gt; np.dot(a, b)[2,3,2,1,2,2]
+    499128
+    &gt;&gt;&gt; sum(a[2,3,2,:] * b[1,2,:,2])
+    499128
+
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dot(a, b, out=None)
+
+Dot product of two arrays. Specifically,
+
+- If both `a` and `b` are 1-D arrays, it is inner product of vectors
+  (without complex conjugation).
+
+- If both `a` and `b` are 2-D arrays, it is matrix multiplication,
+  but using :func:`matmul` or ``a @ b`` is preferred.
+
+- If either `a` or `b` is 0-D (scalar), it is equivalent to
+  :func:`multiply` and using ``numpy.multiply(a, b)`` or ``a * b`` is
+  preferred.
+
+- If `a` is an N-D array and `b` is a 1-D array, it is a sum product over
+  the last axis of `a` and `b`.
+
+- If `a` is an N-D array and `b` is an M-D array (where ``M&gt;=2``), it is a
+  sum product over the last axis of `a` and the second-to-last axis of
+  `b`::
+
+    dot(a, b)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])
+
+It uses an optimized BLAS library when possible (see `numpy.linalg`).
+
+Parameters
+----------
+a : array_like
+    First argument.
+b : array_like
+    Second argument.
+out : ndarray, optional
+    Output argument. This must have the exact kind that would be returned
+    if it was not used. In particular, it must have the right type, must be
+    C-contiguous, and its dtype must be the dtype that would be returned
+    for `dot(a,b)`. This is a performance feature. Therefore, if these
+    conditions are not met, an exception is raised, instead of attempting
+    to be flexible.
+
+Returns
+-------
+output : ndarray
+    Returns the dot product of `a` and `b`.  If `a` and `b` are both
+    scalars or both 1-D arrays then a scalar is returned; otherwise
+    an array is returned.
+    If `out` is given, then it is returned.
+
+Raises
+------
+ValueError
+    If the last dimension of `a` is not the same size as
+    the second-to-last dimension of `b`.
+
+See Also
+--------
+vdot : Complex-conjugating dot product.
+tensordot : Sum products over arbitrary axes.
+einsum : Einstein summation convention.
+matmul : &#39;@&#39; operator as method with out parameter.
+linalg.multi_dot : Chained dot product.
+
+Examples
+--------
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; np.dot(3, 4)
+12
+
+Neither argument is complex-conjugated:
+
+&gt;&gt;&gt; np.dot([2j, 3j], [2j, 3j])
+(-13+0j)
+
+For 2-D arrays it is the matrix product:
+
+&gt;&gt;&gt; a = [[1, 0], [0, 1]]
+&gt;&gt;&gt; b = [[4, 1], [2, 2]]
+&gt;&gt;&gt; np.dot(a, b)
+array([[4, 1],
+       [2, 2]])
+
+&gt;&gt;&gt; a = np.arange(3*4*5*6).reshape((3,4,5,6))
+&gt;&gt;&gt; b = np.arange(3*4*5*6)[::-1].reshape((5,4,6,3))
+&gt;&gt;&gt; np.dot(a, b)[2,3,2,1,2,2]
+499128
+&gt;&gt;&gt; sum(a[2,3,2,:] * b[1,2,:,2])
+499128
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.dot<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>❓❓</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/numpy/numpy/blob/master/numpy/core/multiarray.py">Código fonte da função <code class="docutils literal notranslate"><span class="pre">np.dot</span></code></a> - <strong>linha 716</strong></p></li>
+<li><p><a class="reference external" href="https://github.com/numpy/numpy/blob/master/numpy/core/src/multiarray/methods.c">Agora de verdade</a> - <strong>linha 2269</strong></p></li>
+<li><p><a class="reference external" href="https://github.com/numpy/numpy/blob/master/numpy/core/src/multiarray/multiarraymodule.c">For realz</a> - <strong>linha 981 / 1023</strong></p></li>
+</ul>
+</section>
+</section>
+<section id="cuidado">
+<h3>Cuidado!<a class="headerlink" href="#cuidado" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sum<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(10)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.sum<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">reset</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="vetorizacao-exemplo-2">
+<h4>Vetorização: Exemplo 2<a class="headerlink" href="#vetorizacao-exemplo-2" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> 
+              <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1,  5,  9],
+       [ 2,  6, 10],
+       [ 3,  7, 11],
+       [ 4,  8, 12]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">ndim</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1,  2,  3,  4,  5,  6],
+       [ 7,  8,  9, 10, 11, 12]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1,  2,  3],
+       [ 4,  5,  6],
+       [ 7,  8,  9],
+       [10, 11, 12]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">u</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.43961212, 0.49070431, 0.17881541, 0.10581514, 0.23055203,
+       0.18895625, 0.65914532, 0.14817145, 0.04337713, 0.46230591])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">ndim</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.43961212, 0.49070431, 0.17881541, 0.10581514, 0.23055203,
+       0.18895625, 0.65914532, 0.14817145, 0.04337713, 0.46230591])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">T</span> <span class="o">==</span> <span class="n">u</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">T</span> <span class="ow">is</span> <span class="n">u</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.transpose<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">T</span>
+<span class="n">v</span><span class="o">.</span><span class="n">base</span> <span class="ow">is</span> <span class="n">u</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.        , 0.49070431, 0.17881541, 0.10581514, 0.23055203,
+       0.18895625, 0.65914532, 0.14817145, 0.04337713, 0.46230591])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.        , 0.49070431, 0.17881541, 0.10581514, 0.23055203,
+       0.18895625, 0.65914532, 0.14817145, 0.04337713, 0.46230591])
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.base.html">Documentação para ndarray.base</a></p>
+</section>
+<section id="o-que-sao-essas-dimensoes">
+<h4>❓ (O que são essas dimensões?)<a class="headerlink" href="#o-que-sao-essas-dimensoes" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://fgnt.github.io/python_crashkurs_doc/_images/numpy_array_t.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://fgnt.github.io/python_crashkurs_doc/_images/numpy_array_t.png" width="600"/></div></div>
+</div>
+<p><em><a class="reference external" href="https://www.oreilly.com/library/view/elegant-scipy/9781491922927/ch01.html">Fonte: Elegant SciPy</a></em></p>
+</section>
+<section id="vetorizacao-exemplo-3">
+<h4>Vetorização: Exemplo 3<a class="headerlink" href="#vetorizacao-exemplo-3" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(78)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([15, 18, 21, 24])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([10, 26, 42])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="n">A</span><span class="o">.</span><span class="n">itemsize</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>96
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">nbytes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>96
+</pre></div>
+</div>
+</div>
+</div>
+<p>Novamente:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://media.springernature.com/full/springer-static/image/art%3A10.1038</span><span class="si">%2F</span><span class="s2">s41586-020-2649-2/MediaObjects/41586_2020_2649_Fig1_HTML.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-020-2649-2/MediaObjects/41586_2020_2649_Fig1_HTML.png" width="600"/></div></div>
+</div>
+<!-- #region tags=["section"] -->
+</section>
+</section>
+<section id="broadcasting">
+<h3>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h3>
+<!-- #endregion -->
+<p>Permite fazer operações vetoriais de maneira generalizada.</p>
+<p>☠️ <strong>Cuidado!</strong> ☠️</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">+</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([6, 7, 8, 9])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1,  2,  3,  4],
+       [ 5,  6,  7,  8],
+       [ 9, 10, 11, 12]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">+</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 2,  4,  6,  8],
+       [ 6,  8, 10, 12],
+       [10, 12, 14, 16]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.add<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercicios">
+<h3>📒 Exercícios<a class="headerlink" href="#exercicios" title="Link to this heading">#</a></h3>
+<p>Como determinar a dieta mais econômica que satisfaz os requerimentos nutricionais básicos para boa saúde? Vamos supor que queremos fazer nossa compra semanal no supermercado: leite, miojo e café. Atualmente, os preços são:</p>
+<ul class="simple">
+<li><p>Leite: 4 reais o litro</p></li>
+<li><p>Miojo: 1,50 o pacote</p></li>
+<li><p>Café: 10 reais a unidade</p></li>
+</ul>
+<p>Vamos nos preocupar com 4 ingredientes nutricionais básicos: proteína, carboidratos e gordura.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Produto</p></th>
+<th class="head"><p>Carboidratos</p></th>
+<th class="head"><p>Proteínas</p></th>
+<th class="head"><p>Gorduras</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Miojo (100g)</p></td>
+<td><p>63,6g</p></td>
+<td><p>10,0g</p></td>
+<td><p>15,5g</p></td>
+</tr>
+<tr class="row-odd"><td><p>Leite (100ml)</p></td>
+<td><p>4,66g</p></td>
+<td><p>3,32g</p></td>
+<td><p>3,35g</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="exercicio-1">
+<h4>Exercício 1<a class="headerlink" href="#exercicio-1" title="Link to this heading">#</a></h4>
+<p>Use uma ndarray <code class="docutils literal notranslate"><span class="pre">a</span></code> bidimensional que armazene, na posição <span class="math notranslate nohighlight">\((i, j)\)</span>, a quantidade de gramas do nutriente <span class="math notranslate nohighlight">\(i\)</span> contidas em cada grama do alimento <span class="math notranslate nohighlight">\(j\)</span>.</p>
+</section>
+<section id="solucao-1">
+<h4>Solução 1<a class="headerlink" href="#solucao-1" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabela</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">miojo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">63.6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">15.5</span><span class="p">])</span>
+<span class="n">leite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.66</span><span class="p">,</span> <span class="mf">3.32</span><span class="p">,</span> <span class="mf">3.35</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Para ter os valores nutricionais por grama (ao invés de para cada 100g)</span>
+<span class="n">miojo</span> <span class="o">=</span> <span class="n">miojo</span><span class="o">/</span><span class="mi">100</span>
+<span class="c1"># Mesma coisa para o leite: vamos obter o valor por ml</span>
+<span class="n">leite</span> <span class="o">=</span> <span class="n">leite</span><span class="o">/</span><span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabela</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">miojo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabela</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.636, 0.   ],
+       [0.1  , 0.   ],
+       [0.155, 0.   ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabela</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">leite</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabela</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.636 , 0.0466],
+       [0.1   , 0.0332],
+       [0.155 , 0.0335]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="solucao-2">
+<h4>Solução 2<a class="headerlink" href="#solucao-2" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">miojo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">63.6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">15.5</span><span class="p">])</span>
+<span class="n">leite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.66</span><span class="p">,</span> <span class="mf">3.32</span><span class="p">,</span> <span class="mf">3.35</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabela</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">miojo</span><span class="p">,</span> <span class="n">leite</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">/</span><span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabela</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.636 , 0.0466],
+       [0.1   , 0.0332],
+       [0.155 , 0.0335]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="solucao-3">
+<h4>Solução 3<a class="headerlink" href="#solucao-3" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabela</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">miojo</span><span class="p">,</span> <span class="n">leite</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabela</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.636 , 0.0466],
+       [0.1   , 0.0332],
+       [0.155 , 0.0335]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercicio-2">
+<h4>Exercício 2<a class="headerlink" href="#exercicio-2" title="Link to this heading">#</a></h4>
+<p>A partir da array <code class="docutils literal notranslate"><span class="pre">a</span></code> criada acima, extraia um array que contenha os valores de nutriente por alimento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carbs</span> <span class="o">=</span> <span class="n">tabela</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">proteina</span> <span class="o">=</span> <span class="n">tabela</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">gordura</span> <span class="o">=</span> <span class="n">tabela</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carbs</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">proteina</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">gordura</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((2,), (2,), (2,))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercicio-3">
+<h4>Exercício 3<a class="headerlink" href="#exercicio-3" title="Link to this heading">#</a></h4>
+<p>Calcule o preço de uma compra incluindo 2 litros de leite, 1 pacote de café e 5 pacotes de miojo.</p>
+<p>Para facilitar, vamos usar a seguinte notação:</p>
+<p><span class="math notranslate nohighlight">\(x_0\)</span> -&gt; quantidade de litros de leite;</p>
+<p><span class="math notranslate nohighlight">\(x_1\)</span> -&gt; quantidade de pacotes de miojo;</p>
+<p><span class="math notranslate nohighlight">\(x_2\)</span> -&gt; quantidade de pacotes de café;</p>
+<p>Isso significa que podemos representar a quantidade a ser comprada como:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Leite: 4 reais o litro</span>
+<span class="c1"># Miojo: 1,50 o pacote</span>
+<span class="c1"># Café: 10 reais a unidade</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Total da compra:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(25.5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">total</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(25.5)
+</pre></div>
+</div>
+</div>
+</div>
+<p>O custo pode ser calculado, em geral, como</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">custo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Assim, se mudamos as quantidades para</p>
+<p>10 litros de leite; 8 pacotes de miojo; 2 pacotes de café</p>
+<p>temos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">custo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(72.0)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="operacoes-vetorizadas-e-pontos-flutuantes">
+<h3>Operações vetorizadas e pontos flutuantes<a class="headerlink" href="#operacoes-vetorizadas-e-pontos-flutuantes" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-3.14159265, -2.44346095, -1.74532925, -1.04719755, -0.34906585,
+        0.34906585,  1.04719755,  1.74532925,  2.44346095,  3.14159265])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.22464680e-16, -6.42787610e-01, -9.84807753e-01, -8.66025404e-01,
+       -3.42020143e-01,  3.42020143e-01,  8.66025404e-01,  9.84807753e-01,
+        6.42787610e-01,  1.22464680e-16])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="observacao">
+<h4>⚠️⚠️ Observação<a class="headerlink" href="#observacao" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Observe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_19339/873513115.py:1: RuntimeWarning: invalid value encountered in divide
+  np.array(0) / np.array(0)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(nan)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">//</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_19339/2018018105.py:1: RuntimeWarning: divide by zero encountered in floor_divide
+  np.array(0) // np.array(0)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1">#.astype(float)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_19339/1946231171.py:1: RuntimeWarning: invalid value encountered in cast
+  np.array([np.nan]).astype(int) #.astype(float)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-9223372036854775808])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">0.3</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">*</span> <span class="mf">0.1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Nunca teste se um número real é igual a outro! Use sempre tolerâncias.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mf">0.3</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(5.551115123125783e-17)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="explicacao">
+<h4>Explicação<a class="headerlink" href="#explicacao" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NaN</span></code> : <em>Not a Number</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Inf</span></code> : Infinito?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">]:</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">)</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-128
+127
+-2147483648
+2147483647
+-9223372036854775808
+9223372036854775807
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">)</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3.4028235e+38
+3.4028235e+38
+1.1920929e-07
+-1.7976931348623157e+308
+1.7976931348623157e+308
+2.220446049250313e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="o">+</span><span class="mf">1.e308</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_19339/1273613367.py:1: RuntimeWarning: overflow encountered in scalar add
+  np.finfo(np.float64).max+1.e308
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(inf)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Leia mais na documentação oficial do Python: <a class="reference external" href="https://docs.python.org/pt-br/3/tutorial/floatingpoint.html">https://docs.python.org/pt-br/3/tutorial/floatingpoint.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True, False, False, False, False, False, False, False, False,
+       False])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="basic-indexing-advanced-fancy-indexing">
+<h3>Basic Indexing, Advanced (Fancy) Indexing<a class="headerlink" href="#basic-indexing-advanced-fancy-indexing" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2, 3, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 3, 5])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">2</span><span class="p">,::</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 7, 10, 13],
+       [21, 24, 27]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>As arrays do NumPy podem ser indexadas por outras arrays (ou qualquer outro objeto tipo-sequência que possa ser convertido para uma array, como listas, com a exceção de tuplas). No entanto, isso pode não ser tão eficiente pois ativa o <a class="reference external" href="https://numpy.org/devdocs/reference/arrays.indexing.html#advanced-indexing">indiciamento avançado</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([7, 7, 4, 2])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[9, 9],
+       [8, 7]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Também podemos usar máscaras booleanas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">y</span><span class="o">&gt;</span><span class="mi">20</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">]])</span>
+<span class="n">x</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0,  1,  2,  3,  4],
+       [ 5,  6,  7,  8,  9],
+       [20, 21, 22, 23, 24],
+       [25, 26, 27, 28, 29]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 2, 3, 4],
+       [1, 2, 3, 4, 5],
+       [2, 3, 4, 5, 6],
+       [3, 4, 5, 6, 7],
+       [4, 5, 6, 7, 8]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[29, 32, 35],
+       [38, 41, 44],
+       [47, 50, 53]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">,:,:,</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[29, 32, 35],
+       [38, 41, 44],
+       [47, 50, 53]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Exercícios<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<section id="criar-um-array-aleatorio-de-tamanho-12-e-substituir-o-menor-valor-por-999">
+<h4>Criar um array aleatório de tamanho 12 e substituir o menor valor por -999.<a class="headerlink" href="#criar-um-array-aleatorio-de-tamanho-12-e-substituir-o-menor-valor-por-999" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aleatorio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">aleatorio</span><span class="p">[</span><span class="n">aleatorio</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span>
+<span class="n">aleatorio</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 8.37846566e-01, -9.99000000e+02,  2.43672256e-01,  7.64456955e-01,
+        1.01621485e-01,  6.34192781e-01,  2.84714950e-01,  6.01713572e-01,
+        2.24672594e-01,  2.92966223e-01,  3.21318674e-01,  7.18568189e-01])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ordenar-uma-array-pela-n-esima-coluna">
+<h4>Ordenar uma array pela n-ésima coluna<a class="headerlink" href="#ordenar-uma-array-pela-n-esima-coluna" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vetor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">vetor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[6, 3, 5],
+       [0, 7, 1],
+       [3, 7, 4]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vetor</span><span class="p">[</span><span class="n">vetor</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">argsort</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[6, 3, 5],
+       [0, 7, 1],
+       [3, 7, 4]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="como-saber-se-uma-array-2d-tem-colunas-nulas">
+<h4>Como saber se uma array 2D tem colunas nulas?<a class="headerlink" href="#como-saber-se-uma-array-2d-tem-colunas-nulas" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2, 2, 0, 2, 0, 1, 0, 0, 2, 2],
+       [1, 1, 1, 0, 2, 1, 2, 2, 2, 1],
+       [1, 0, 1, 0, 0, 0, 2, 0, 0, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">~</span><span class="n">z</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.False_
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 2, 0, 2, 0, 1, 0, 0, 2, 2],
+       [0, 1, 1, 0, 2, 1, 2, 2, 2, 1],
+       [0, 0, 1, 0, 0, 0, 2, 0, 0, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">~</span><span class="n">z</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.True_
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="trocar-duas-linhas-de-uma-matriz">
+<h4>Trocar duas linhas de uma matriz<a class="headerlink" href="#trocar-duas-linhas-de-uma-matriz" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0,  1,  2,  3,  4],
+       [ 5,  6,  7,  8,  9],
+       [10, 11, 12, 13, 14],
+       [15, 16, 17, 18, 19],
+       [20, 21, 22, 23, 24]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 5,  6,  7,  8,  9],
+       [ 0,  1,  2,  3,  4],
+       [10, 11, 12, 13, 14],
+       [15, 16, 17, 18, 19],
+       [20, 21, 22, 23, 24]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="submodulos">
+<h3>2.4 Submódulos<a class="headerlink" href="#submodulos" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.random</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.ma</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.linalg</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.f2py</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy
+=====
+
+Provides
+  1. An array object of arbitrary homogeneous items
+  2. Fast mathematical operations over arrays
+  3. Linear Algebra, Fourier Transforms, Random Number Generation
+
+How to use the documentation
+----------------------------
+Documentation is available in two forms: docstrings provided
+with the code, and a loose standing reference guide, available from
+`the NumPy homepage &lt;https://numpy.org&gt;`_.
+
+We recommend exploring the docstrings using
+`IPython &lt;https://ipython.org&gt;`_, an advanced Python shell with
+TAB-completion and introspection capabilities.  See below for further
+instructions.
+
+The docstring examples assume that `numpy` has been imported as ``np``::
+
+  &gt;&gt;&gt; import numpy as np
+
+Code snippets are indicated by three greater-than signs::
+
+  &gt;&gt;&gt; x = 42
+  &gt;&gt;&gt; x = x + 1
+
+Use the built-in ``help`` function to view a function&#39;s docstring::
+
+  &gt;&gt;&gt; help(np.sort)
+  ... # doctest: +SKIP
+
+For some objects, ``np.info(obj)`` may provide additional help.  This is
+particularly true if you see the line &quot;Help on ufunc object:&quot; at the top
+of the help() page.  Ufuncs are implemented in C, not Python, for speed.
+The native Python help() does not know how to view their help, but our
+np.info() function does.
+
+Available subpackages
+---------------------
+lib
+    Basic functions used by several sub-packages.
+random
+    Core Random Tools
+linalg
+    Core Linear Algebra Tools
+fft
+    Core FFT routines
+polynomial
+    Polynomial tools
+testing
+    NumPy testing tools
+distutils
+    Enhancements to distutils with support for
+    Fortran compilers support and more (for Python &lt;= 3.11)
+
+Utilities
+---------
+test
+    Run numpy unittests
+show_config
+    Show numpy build configuration
+__version__
+    NumPy version string
+
+Viewing documentation using IPython
+-----------------------------------
+
+Start IPython and import `numpy` usually under the alias ``np``: `import
+numpy as np`.  Then, directly past or use the ``%cpaste`` magic to paste
+examples into the shell.  To see which functions are available in `numpy`,
+type ``np.&lt;TAB&gt;`` (where ``&lt;TAB&gt;`` refers to the TAB key), or use
+``np.*cos*?&lt;ENTER&gt;`` (where ``&lt;ENTER&gt;`` refers to the ENTER key) to narrow
+down the list.  To view the docstring for a function, use
+``np.cos?&lt;ENTER&gt;`` (to view the docstring) and ``np.cos??&lt;ENTER&gt;`` (to view
+the source code).
+
+Copies vs. in-place operation
+-----------------------------
+Most of the functions in `numpy` return a copy of the array argument
+(e.g., `np.sort`).  In-place versions of these functions are often
+available as array methods, i.e. ``x = np.array([1,2,3]); x.sort()``.
+Exceptions to this rule are documented.
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><a class="reference internal" href="00-Tutorial_Python_Sul_2024.html"><span class="std std-doc">Voltar ao notebook principal</span></a></p>
+<p><a class="reference internal" href="02-Tutorial_Matplotlib.html"><span class="std std-doc">Ir para o notebook Matplotlib</span></a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="00-Tutorial_Python_Sul_2024.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">O Ecossistema Científico no Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02-Tutorial_Matplotlib.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">Matplotlib: figurinhas maneiras</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Conteúdo
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-e-a-numpy">O que é a NumPy?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-nao-usar-listas">Por que não usar listas?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alguns-exemplos">Alguns exemplos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-o-modulo-array">E o módulo array?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#como-isso-acontece">Como isso acontece?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vetorizacao">Vetorização</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vetorizacao-exemplo-1">Vetorização: Exemplo 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nota-onde-estao-implementadas-as-funcoes-do-numpy">Nota: onde estão implementadas as funções do NumPy?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuidado">Cuidado!</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vetorizacao-exemplo-2">Vetorização: Exemplo 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-sao-essas-dimensoes">❓ (O que são essas dimensões?)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vetorizacao-exemplo-3">Vetorização: Exemplo 3</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">📒 Exercícios</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-1">Exercício 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solucao-1">Solução 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solucao-2">Solução 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solucao-3">Solução 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-2">Exercício 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-3">Exercício 3</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operacoes-vetorizadas-e-pontos-flutuantes">Operações vetorizadas e pontos flutuantes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#observacao">⚠️⚠️ Observação</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacao">Explicação</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-indexing-advanced-fancy-indexing">Basic Indexing, Advanced (Fancy) Indexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercícios</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#criar-um-array-aleatorio-de-tamanho-12-e-substituir-o-menor-valor-por-999">Criar um array aleatório de tamanho 12 e substituir o menor valor por -999.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ordenar-uma-array-pela-n-esima-coluna">Ordenar uma array pela n-ésima coluna</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#como-saber-se-uma-array-2d-tem-colunas-nulas">Como saber se uma array 2D tem colunas nulas?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trocar-duas-linhas-de-uma-matriz">Trocar duas linhas de uma matriz</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submodulos">2.4 Submódulos</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+De Melissa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
