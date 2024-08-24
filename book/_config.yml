@@ -3,7 +3,8 @@
 
 title: Tutorial Python Brasil 2020
 author: Melissa
-logo: logo.png
+logo: python-sul.svg
+copyright: "2024"
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -12,7 +13,7 @@ execute:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/melissawm/tutorial-pybr2020  # Online location of your book
+  url: https://github.com/melissawm/tutorial-pysul2024  # Online location of your book
   path_to_book: book  # Optional path to your book, relative to the repository root
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
@@ -21,3 +22,5 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  favicon: logo-header.png
+
