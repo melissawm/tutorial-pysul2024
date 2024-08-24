@@ -1,18 +1,17 @@
 ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
 
-```python
+
+```{code-cell}
 from IPython.display import Image
 Image("imagens/scipy_med.png", width=100)
 ```
@@ -32,22 +31,22 @@ A SciPy é um conjunto de bibliotecas para computação científica, incluindo:
 Sua base é a NumPy.
 <!-- #endregion -->
 
-```python
+```{code-cell}
 import scipy as sp
 print(sp.__doc__)
 ```
 
 ## Exemplo: Minimização de funções
 
-```python
+```{code-cell}
 from scipy.optimize import fmin
 ```
 
-```python
+```{code-cell}
 func = lambda x : x**2
 ```
 
-```python
+```{code-cell}
 fmin(func, -1)
 ```
 
@@ -63,7 +62,7 @@ $$y(0) = 0$$
 
 Encontre uma solução numérica para a equação diferencial com condição inicial associada. Expanda o horizonte temporal até encontrar uma solução estável.  
 
-```python
+```{code-cell}
 %matplotlib widget
 import numpy as np
 from scipy.integrate import odeint

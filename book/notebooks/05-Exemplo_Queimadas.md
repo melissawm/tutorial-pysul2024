@@ -1,11 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -19,19 +17,19 @@ Dados do INPE: http://queimadas.dgi.inpe.br/queimadas/bdqueimadas/
 
 Dados da NASA: https://firms.modaps.eosdis.nasa.gov/
 
-```python
+```{code-cell}
 !ls
 ```
 
-```python
+```{code-cell}
 zipfile_inpe = "dados/Focos_BDQueimadas.zip"
 ```
 
-```python
+```{code-cell}
 from zipfile import ZipFile
 ```
 
-```python
+```{code-cell}
 with ZipFile(zipfile_inpe, 'r') as zip: 
     zip.printdir() 
     print(f'Extracting file {zipfile_inpe} now...') 
@@ -39,55 +37,55 @@ with ZipFile(zipfile_inpe, 'r') as zip:
     print('Done!')
 ```
 
-```python
+```{code-cell}
 !ls dados
 ```
 
-```python
+```{code-cell}
 import os
 csv_inpe = os.path.join("dados", "Focos_2020-07-01_2020-09-30.csv")
 ```
 
-```python
+```{code-cell}
 with open(csv_inpe, 'r') as f:
     data = f.readlines()
 ```
 
-```python
+```{code-cell}
 print(data[0:10])
 ```
 
-```python
+```{code-cell}
 import pandas as pd
 ```
 
-```python
+```{code-cell}
 with open(csv_inpe, 'r') as f:
     df = pd.read_csv(f)
 ```
 
-```python
+```{code-cell}
 df
 ```
 
-```python
+```{code-cell}
 df = df[df['riscofogo']!=0.0]
 ```
 
-```python
+```{code-cell}
 df['satelite'].unique()
 ```
 
-```python
+```{code-cell}
 df = df[df['satelite']=='TERRA_M-M']
 ```
 
-```python
+```{code-cell}
 del df['satelite']
 del df['pais']
 ```
 
-```python
+```{code-cell}
 df
 ```
 
@@ -97,7 +95,7 @@ Risco de Queima: http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/pergu
 
 Monografia: https://monografias.ufrn.br/jspui/bitstream/123456789/9704/1/tcc_dias_alexandre_henrique.pdf
 
-```python
+```{code-cell}
 %matplotlib widget
 from ipyleaflet import Map, Marker, CircleMarker
 
@@ -111,12 +109,12 @@ m = Map(center=center, zoom=3)
 display(m)
 ```
 
-```python
+```{code-cell}
 frp_notnull = df[df['frp'].notnull()]
 frp_notnull = frp_notnull.loc[frp_notnull['datahora'].str.contains('2020/09/30')]
 ```
 
-```python
+```{code-cell}
 for index, row in frp_notnull.iterrows():
     lat = row['latitude']
     lon = row['longitude']
@@ -132,42 +130,42 @@ for index, row in frp_notnull.iterrows():
 - para uma mesma cidade, pegar o risco em função do tempo
 - para um grupo de cidades plotar o risco em um mesmo gráfico
 
-```python
+```{code-cell}
 lista_municipios = df['municipio'].unique()
 type(lista_municipios), len(lista_municipios)
 ```
 
-```python
+```{code-cell}
 corumba = df[df['municipio'] == "CORUMBA"]
 corumba
 ```
 
-```python
+```{code-cell}
 riscofogo = corumba['riscofogo']
 diasemchuva = corumba['diasemchuva']
 ```
 
-```python
+```{code-cell}
 import numpy as np
 corumba = corumba.replace(-999, np.nan)
 ```
 
-```python
+```{code-cell}
 agrupado = corumba.groupby('datahora').mean()
 ```
 
-```python
+```{code-cell}
 agrupado
 ```
 
-```python
+```{code-cell}
 datas = list(agrupado.index)
 datas = [item[0:10] for item in datas]
 datas
 len(datas)
 ```
 
-```python
+```{code-cell}
 import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots(2, 1, figsize=(8, 6))
@@ -185,7 +183,7 @@ ax[1].set_xticklabels(datas[::10], rotation=30)
 fig.tight_layout()
 ```
 
-```python
+```{code-cell}
 fig, ax = plt.subplots(figsize=(8, 4))
 
 ax.plot(agrupado['riscofogo'], 'r')
@@ -210,6 +208,3 @@ fig.tight_layout()
 
 [Ir para o notebook SciPy](06-Tutorial_SciPy.md)
 
-```python
-
-```

@@ -1,27 +1,23 @@
 ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
 
-```python
+```{code-cell}
 from IPython.display import Image
 Image("imagens/numpylogo.png", width=600)
 ```
 
-<!-- #region tags=["chapter"] -->
 # NumPy: a base da computação científica no Python
-<!-- #endregion -->
 
-```python
+```{code-cell}
 import numpy as np
 ```
 
@@ -49,9 +45,9 @@ A biblioteca NumPy consiste em:
 - ferramentas para a integração de código C/C++ e Fortran
 - álgebra linear, transformadas de Fourier, gerador de números aleatórios
 
-<!-- #region tags=["section"] -->
+---
+
 ### Por que não usar listas?
-<!-- #endregion -->
 
 Uma lista em Python é às vezes vista como equivalente de um *array* em outras linguagens, mas uma lista é mutável e pode conter elementos de tipos diferentes.
 
@@ -60,13 +56,11 @@ Quando uma array de fato contém elementos de um só tipo, temos algumas vantage
 - Desempenho
 - Funcionalidades específicas
 
-
 🎈 Link interessante: https://webcourses.ucf.edu/courses/1249560/pages/python-lists-vs-numpy-arrays-what-is-the-difference
-
 
 #### Alguns exemplos
 
-```python
+```{code-cell}
 n = 10_000_000
 v = []
 w = []
@@ -75,59 +69,59 @@ for i in range(n):
     w.append(i/10)
 ```
 
-```python
+```{code-cell}
 type(v), type(w)
 ```
 
-```python
+```{code-cell}
 %timeit v + w
 ```
 
-```python
+```{code-cell}
 v_np = np.array(v)
 w_np = np.array(w)
 ```
 
-```python
+```{code-cell}
 type(v_np), type(w_np)
 ```
 
-```python
+```{code-cell}
 v_np.dtype, w_np.dtype
 ```
 
-```python
+```{code-cell}
 v_np.shape
 ```
 
-```python
+```{code-cell}
 v_np.size
 ```
 
-```python
+```{code-cell}
 v_np.nbytes/v_np.size
 ```
 
-```python
+```{code-cell}
 %timeit v_np + w_np
 ```
 
 #### E o módulo array?
 
-```python
+```{code-cell}
 import array
 ```
 
-```python
+```{code-cell}
 v_arr = array.array('d', v)
 w_arr = array.array('d', w)
 ```
 
-```python
+```{code-cell}
 v_arr.typecode
 ```
 
-```python
+```{code-cell}
 %timeit v_arr + w_arr
 ```
 
@@ -141,7 +135,7 @@ As arrays do NumPy são eficientes porque
 - são *views* de objetos alocados por C/C++, Fortran e Cython
 - as operações vetorizadas em geral evitam copiar arrays desnecessariamente
 
-```python
+```{code-cell}
 Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-020-2649-2/MediaObjects/41586_2020_2649_Fig1_HTML.png", width=600)
 ```
 
@@ -160,37 +154,37 @@ Vetorização é a capacidade de expressar operações em arrays sem especificar
 
 ### Vetorização: Exemplo 1
 
-```python
+```{code-cell}
 v = np.array([1, 2, 3, 4])
 ```
 
-```python
+```{code-cell}
 v**2
 ```
 
-```python
+```{code-cell}
 np.power(v, 2)
 ```
 
-```python
+```{code-cell}
 u = np.array([4.5, 3, 2, 1])
 ```
 
-```python
+```{code-cell}
 np.dot(u, v) 
 ```
 
 #### Nota: onde estão implementadas as funções do NumPy?
 
-```python
+```{code-cell}
 print(np.dot.__doc__)
 ```
 
-```python
+```{code-cell}
 np.info(np.dot)
 ```
 
-```python
+```{code-cell}
 np.dot?
 ```
 
@@ -205,28 +199,28 @@ np.dot?
 
 ### Cuidado!
 
-```python
+```{code-cell}
 sum?
 ```
 
-```python
+```{code-cell}
 sum(range(5), -1)
 ```
 
-```python
+```{code-cell}
 from numpy import *
 sum(range(5), -1)
 ```
 
-```python
+```{code-cell}
 np.sum?
 ```
 
-```python
+```{code-cell}
 %reset
 ```
 
-```python
+```{code-cell}
 import numpy as np
 ```
 
@@ -235,83 +229,83 @@ import numpy as np
 
 #### Vetorização: Exemplo 2
 
-```python
+```{code-cell}
 A = np.array([[1, 2, 3, 4],
               [5, 6, 7, 8], 
               [9, 10, 11, 12]])
 ```
 
-```python
+```{code-cell}
 A.T
 ```
 
-```python
+```{code-cell}
 A.shape
 ```
 
-```python
+```{code-cell}
 A.ndim
 ```
 
-```python
+```{code-cell}
 A.reshape((2, 6))
 ```
 
-```python
+```{code-cell}
 A.reshape((4, 3))
 ```
 
-```python
+```{code-cell}
 A.ravel()
 ```
 
-```python
+```{code-cell}
 u = np.random.rand(10)
 u
 ```
 
-```python
+```{code-cell}
 u.ndim
 ```
 
-```python
+```{code-cell}
 u.shape
 ```
 
-```python
+```{code-cell}
 u.T
 ```
 
-```python
+```{code-cell}
 u.T.shape
 ```
 
-```python
+```{code-cell}
 u.T == u
 ```
 
-```python
+```{code-cell}
 u.T is u
 ```
 
-```python
+```{code-cell}
 np.transpose?
 ```
 
-```python
+```{code-cell}
 v = u.T
 v.base is u
 ```
 
-```python
+```{code-cell}
 u[0] = 0
 ```
 
-```python
+```{code-cell}
 u
 ```
 
-```python
+```{code-cell}
 v
 ```
 
@@ -320,7 +314,7 @@ v
 
 #### ❓ (O que são essas dimensões?)
 
-```python
+```{code-cell}
 from IPython.display import Image
 Image(url="https://fgnt.github.io/python_crashkurs_doc/_images/numpy_array_t.png", width=600)
 ```
@@ -330,33 +324,33 @@ Image(url="https://fgnt.github.io/python_crashkurs_doc/_images/numpy_array_t.png
 
 #### Vetorização: Exemplo 3
 
-```python
+```{code-cell}
 A[0, :]  
 ```
 
-```python
+```{code-cell}
 A.sum()
 ```
 
-```python
+```{code-cell}
 A.sum(axis=0)
 ```
 
-```python
+```{code-cell}
 A.sum(axis=1)
 ```
 
-```python
+```{code-cell}
 A.size * A.itemsize
 ```
 
-```python
+```{code-cell}
 A.nbytes
 ```
 
 Novamente:
 
-```python
+```{code-cell}
 Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-020-2649-2/MediaObjects/41586_2020_2649_Fig1_HTML.png", width=600)
 ```
 
@@ -368,27 +362,27 @@ Permite fazer operações vetoriais de maneira generalizada.
 
 ☠️ **Cuidado!** ☠️
 
-```python
+```{code-cell}
 x = np.array([1, 2, 3, 4])
 ```
 
-```python
+```{code-cell}
 x + 5
 ```
 
-```python
+```{code-cell}
 A
 ```
 
-```python
+```{code-cell}
 x
 ```
 
-```python
+```{code-cell}
 A+x
 ```
 
-```python
+```{code-cell}
 np.add?
 ```
 
@@ -416,60 +410,60 @@ Use uma ndarray `a` bidimensional que armazene, na posição $(i, j)$, a quantid
 
 #### Solução 1
 
-```python
+```{code-cell}
 tabela = np.zeros((3, 2))
 ```
 
-```python
+```{code-cell}
 miojo = np.array([63.6, 10, 15.5])
 leite = np.array([4.66, 3.32, 3.35])
 ```
 
-```python
+```{code-cell}
 # Para ter os valores nutricionais por grama (ao invés de para cada 100g)
 miojo = miojo/100
 # Mesma coisa para o leite: vamos obter o valor por ml
 leite = leite/100
 ```
 
-```python
+```{code-cell}
 tabela[:, 0] = miojo
 ```
 
-```python
+```{code-cell}
 tabela
 ```
 
-```python
+```{code-cell}
 tabela[:, 1] = leite
 ```
 
-```python
+```{code-cell}
 tabela
 ```
 
 #### Solução 2
 
-```python
+```{code-cell}
 miojo = np.array([63.6, 10, 15.5])
 leite = np.array([4.66, 3.32, 3.35])
 ```
 
-```python
+```{code-cell}
 tabela = np.vstack([miojo, leite]).T/100
 ```
 
-```python
+```{code-cell}
 tabela
 ```
 
 #### Solução 3
 
-```python
+```{code-cell}
 tabela = np.stack([miojo, leite], axis=1)/100
 ```
 
-```python
+```{code-cell}
 tabela
 ```
 
@@ -478,13 +472,13 @@ tabela
 
 A partir da array `a` criada acima, extraia um array que contenha os valores de nutriente por alimento.
 
-```python
+```{code-cell}
 carbs = tabela[0, :]
 proteina = tabela[1, :]
 gordura = tabela[2, :]
 ```
 
-```python
+```{code-cell}
 carbs.shape, proteina.shape, gordura.shape
 ```
 
@@ -503,11 +497,11 @@ $x_2$ -> quantidade de pacotes de café;
 
 Isso significa que podemos representar a quantidade a ser comprada como:
 
-```python
+```{code-cell}
 x = np.array([2, 5, 1])
 ```
 
-```python
+```{code-cell}
 # Leite: 4 reais o litro
 # Miojo: 1,50 o pacote
 # Café: 10 reais a unidade
@@ -516,18 +510,18 @@ c = np.array([4, 1.5, 10])
 
 Total da compra:
 
-```python
+```{code-cell}
 x[0]*c[0] + x[1]*c[1]+x[2]*c[2]
 ```
 
-```python
+```{code-cell}
 total = np.dot(c, x)
 total
 ```
 
 O custo pode ser calculado, em geral, como
 
-```python
+```{code-cell}
 def custo(x):
     c = np.array([4, 1.5, 10])
     return np.dot(x, c)
@@ -539,7 +533,7 @@ Assim, se mudamos as quantidades para
 
 temos
 
-```python
+```{code-cell}
 custo(np.array([10, 8, 2]))
 ```
 
@@ -548,61 +542,61 @@ custo(np.array([10, 8, 2]))
 
 ### Operações vetorizadas e pontos flutuantes
 
-```python
+```{code-cell}
 x = np.linspace(-np.pi, np.pi, 10)
 ```
 
-```python
+```{code-cell}
 x
 ```
 
-```python
+```{code-cell}
 np.sin(x)
 ```
 
 #### ⚠️⚠️ Observação
 
-```python
+```{code-cell}
 0 * np.nan
 ```
 
-```python
+```{code-cell}
 np.nan == np.nan
 ```
 
-```python
+```{code-cell}
 np.inf > np.nan
 ```
 
-```python
+```{code-cell}
 np.nan - np.nan
 ```
 
-```python
+```{code-cell}
 np.nan in set([np.nan])
 ```
 
 Observe:
 
-```python
+```{code-cell}
 np.array(0) / np.array(0)
 ```
 
-```python
+```{code-cell}
 np.array(0) // np.array(0)
 ```
 
-```python
+```{code-cell}
 np.array([np.nan]).astype(int) #.astype(float)
 ```
 
-```python
+```{code-cell}
 0.3 == 3 * 0.1
 ```
 
 **Nunca teste se um número real é igual a outro! Use sempre tolerâncias.**
 
-```python
+```{code-cell}
 np.abs(0.3 - 3*0.1)
 ```
 
@@ -612,34 +606,34 @@ np.abs(0.3 - 3*0.1)
 - `NaN` : *Not a Number*
 - `Inf` : Infinito?
 
-```python
+```{code-cell}
 for dtype in [np.int8, np.int32, np.int64]:
    print(np.iinfo(dtype).min)
    print(np.iinfo(dtype).max)
 ```
 
-```python
+```{code-cell}
 for dtype in [np.float32, np.float64]:
    print(np.finfo(dtype).min)
    print(np.finfo(dtype).max)
    print(np.finfo(dtype).eps)
 ```
 
-```python
+```{code-cell}
 np.finfo(np.float64).max+1.e308
 ```
 
 Leia mais na documentação oficial do Python: https://docs.python.org/pt-br/3/tutorial/floatingpoint.html
 
-```python
+```{code-cell}
 x = np.arange(0, 10*np.pi, np.pi)
 ```
 
-```python
+```{code-cell}
 np.sin(x) == 0
 ```
 
-```python
+```{code-cell}
 np.allclose(np.sin(x), np.zeros(np.shape(x)))
 ```
 
@@ -648,68 +642,68 @@ np.allclose(np.sin(x), np.zeros(np.shape(x)))
 
 ### Basic Indexing, Advanced (Fancy) Indexing
 
-```python
+```{code-cell}
 x = np.arange(10)
 x[2:5]
 ```
 
-```python
+```{code-cell}
 x[:-7]
 ```
 
-```python
+```{code-cell}
 x[1:7:2]
 ```
 
-```python
+```{code-cell}
 y = np.arange(35).reshape(5,7)
 y[1:5:2,::3]
 ```
 
 As arrays do NumPy podem ser indexadas por outras arrays (ou qualquer outro objeto tipo-sequência que possa ser convertido para uma array, como listas, com a exceção de tuplas). No entanto, isso pode não ser tão eficiente pois ativa o [indiciamento avançado](https://numpy.org/devdocs/reference/arrays.indexing.html#advanced-indexing).
 
-```python
+```{code-cell}
 x = np.arange(10,1,-1)
 ```
 
-```python
+```{code-cell}
 x[np.array([3,3,-3,8])]
 ```
 
-```python
+```{code-cell}
 x[np.array([[1,1],[2,3]])]
 ```
 
 Também podemos usar máscaras booleanas:
 
-```python
+```{code-cell}
 b = y>20
 ```
 
-```python
+```{code-cell}
 y[b]
 ```
 
-```python
+```{code-cell}
 x = np.arange(30).reshape(2,3,5)
 ```
 
-```python
+```{code-cell}
 b = np.array([[True, True, False], [False, True, True]])
 x[b]
 ```
 
-```python
+```{code-cell}
 x = np.arange(5)
 x[:,np.newaxis] + x[np.newaxis,:]
 ```
 
-```python
+```{code-cell}
 z = np.arange(81).reshape(3,3,3,3)
 z[1,...,2]
 ```
 
-```python
+```{code-cell}
 z[1,:,:,2]
 ```
 
@@ -718,7 +712,7 @@ z[1,:,:,2]
 
 #### Criar um array aleatório de tamanho 12 e substituir o menor valor por -999.
 
-```python
+```{code-cell}
 aleatorio = np.random.random(12)
 aleatorio[aleatorio.argmax()] = -999
 aleatorio
@@ -726,43 +720,43 @@ aleatorio
 
 #### Ordenar uma array pela n-ésima coluna
 
-```python
+```{code-cell}
 vetor = np.random.randint(0,10,(3,3))
 vetor
 ```
 
-```python
+```{code-cell}
 vetor[vetor[:,1].argsort()]
 ```
 
 #### Como saber se uma array 2D tem colunas nulas?
 
-```python
+```{code-cell}
 z = np.random.randint(0,3,(3,10))
 z
 ```
 
-```python
+```{code-cell}
 (~z.any(axis=0)).any()
 ```
 
-```python
+```{code-cell}
 z[:, 0] = np.zeros(3)
 z
 ```
 
-```python
+```{code-cell}
 (~z.any(axis=0)).any()
 ```
 
 #### Trocar duas linhas de uma matriz
 
-```python
+```{code-cell}
 A = np.arange(25).reshape(5,5)
 A
 ```
 
-```python
+```{code-cell}
 A[[0,1]] = A[[1,0]]
 A
 ```
@@ -775,17 +769,13 @@ A
 - `numpy.linalg`
 - `numpy.f2py`
 
-```python
+```{code-cell}
 print(np.__doc__)
 ```
 
 ---
 
-
 [Voltar ao notebook principal](00-Tutorial_Python_Sul_2024.md)
 
 [Ir para o notebook Matplotlib](02-Tutorial_Matplotlib.md)
 
-```python
-
-```

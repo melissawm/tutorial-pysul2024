@@ -1,11 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -14,7 +12,7 @@ jupyter:
 
 # Exemplo: Regressão usando 3 métodos
 
-```python
+```{code-cell}
 %matplotlib widget
 import numpy as np
 from scipy.interpolate import interp1d
@@ -42,6 +40,3 @@ plt.legend(['linear', 'quadrático', 'interpolação'])
 plt.show();
 ```
 
-```python
-
-```

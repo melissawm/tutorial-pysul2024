@@ -1,11 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -14,67 +12,53 @@ jupyter:
 
 # O Ecossistema Científico no Python
 
-<!-- #region -->
 ```python
 import numpy as np
 import scipy as sp
 import matplotlib as mpl
 ```
-<!-- #endregion -->
 
----
-
-<!-- #region tags=["chapter"] -->
 ## Introdução
 
 - [Quem sou eu?](https://github.com/melissawm) 👋
 - [Código de Conduta](https://python.org.br/cdc/) 🤝
-<!-- #endregion -->
 
-<!-- #region tags=["section"] -->
 ### O que é esse tutorial?
-<!-- #endregion -->
 
 - Primeiro contato
 - Conceitos básicos e quando usar essas bibliotecas
 - Onde buscar ajuda
 
-```python
+```{code-cell}
 from IPython.display import Image
 Image(url="https://i.imgur.com/MBQqSmT.jpg", width=600)
 ```
 
----
-
-<!-- #region tags=["section"] -->
 ### Computação Científica
-<!-- #endregion -->
 
-```python
+```{code-cell}
 Image("imagens/comp_cientifica.png", width=600)
 ```
 
 Na prática...
 
-```python
+```{code-cell}
 Image("imagens/comp_cientifica_2.png", width=600)
 ```
 
 *Baseado [nessa imagem](https://agilescientific.com/blog/2018/1/10/what-is-scientific-computing)*
 
-
 ---
 
-<!-- #region tags=["section"] -->
 ### O que é o ecossistema científico do Python? Quem mora nele?
-<!-- #endregion -->
 
-```python
+```{code-cell}
 Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-020-2649-2/MediaObjects/41586_2020_2649_Fig2_HTML.png", width=600)
 ```
 
 *Fonte: Harris et al., "Array Programming with NumPy", Nature volume 585, pages 357–362 (2020)*
 
+---
 
 #### Histórico
 
@@ -85,6 +69,7 @@ Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.
     - Numeric/Numarray
     - NumPy (2005)
 
+---
 
 #### Linguagens e habilidades
 
@@ -98,6 +83,7 @@ Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.
 - Comunicação
 - Gerenciamento de projetos
 
+---
 
 #### Comunidades: usuários e desenvolvedores
 
@@ -106,35 +92,21 @@ Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.
 - Voluntários
 - Bolsas, patrocínio, doações
 
-
 ---
 
-<!-- #region tags=["section"] -->
-## Conteúdo
-<!-- #endregion -->
+## Conteúdo desse tutorial
 
-<!-- #region -->
 - [Parte 1. NumPy](01-Tutorial_NumPy.md)
-
-
 - [Parte 2. Matplotlib](02-Tutorial_Matplotlib.md)
-
-
 - Parte 3. Exemplos práticos
-
     - [Arrays com máscara (masked arrays)](03-Exemplo_Masked_Arrays.md)
     - [Aproximação de imagens usando a SVD](04-Exemplo_SVD.md)
     - [Queimadas](05-Exemplo_Queimadas.md)
-
-
 - [Parte 4. SciPy](06-Tutorial_SciPy.md)
     - [Regressão](07-Exemplo_Regressao.md)
-    
-<!-- #endregion -->
 
 ---
 
-<!-- #region tags=["chapter"] -->
 ## Outras ferramentas
 
 - [Pandas](https://pandas.pydata.org/https://pandas.pydata.org/)
@@ -150,17 +122,13 @@ Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.
 
 ## Referências
 
-
-
 Algumas referências interessantes e caminhos para mais informações além da documentação oficial.
-
 
 - [From Python to NumPy](https://github.com/rougier/from-python-to-numpy), livro aberto de Nicolas Rougier.
 - [Scientific Python Lectures](https://lectures.scientific-python.org/)
 - [Elegant SciPy](https://github.com/elegant-scipy/elegant-scipy), livro aberto de Juan Nunez-Iglesias, Harriet Dashnow and Stéfan van der Walt (também publicado pela O'Reilly)
 
-<!-- #region tags=["chapter"] -->
 ## Obrigada! 💖
 
 `@melissawm`
-<!-- #endregion -->
+

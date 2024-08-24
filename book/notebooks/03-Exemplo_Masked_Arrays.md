@@ -1,16 +1,15 @@
 ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
+
 
 # Exemplo: Arrays com Máscara
 
@@ -50,7 +49,7 @@ O módulo `numpy.ma` também vem com uma implementação específica da maior pa
 
 Do [Kaggle](https://www.kaggle.com/atilamadai/covid19) a gente pode baixar um conjunto de dados com informações sobre o início da pandemia. Vamos olhar para um subconjunto de dados, contidos no arquivo `who_covid_19_sit_rep_time_series.csv`.
 
-```python
+```{code-cell}
 import numpy as np
 import os
 # A função os.getcwd() retorna o diretório atual
@@ -66,7 +65,7 @@ O arquivo tem dados de diferentes tipos organizado assim:
 
 Vamos explorar os dados deste arquivo para os primeiros 14 dias de registros. Para coletarmos os dados do arquivo `.csv`, vamos usar a função [numpy.genfromtxt](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt).
 
-```python
+```{code-cell}
 # Vamos usar skip_header e usecols para ler apenas um pedaço do arquivo.
 dates = np.genfromtxt(filename, dtype=np.unicode_, delimiter=",",
                       max_rows=1, usecols=range(3, 17),
@@ -88,7 +87,7 @@ Na chamada de `numpy.genfromtxt`, também selecionamos o [numpy.dtype](https://n
 
 Vamos selecionar apenas algumas datas para mostrar no nosso gráfico (os [x-axis ticks](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xticks.html#matplotlib.pyplot.xticks)). Usamos `nbcases.T` para plotar cada linha do arquivo como uma curva do gráfico.
 
-```python
+```{code-cell}
 %matplotlib widget
 import matplotlib.pyplot as plt
 selected_dates = [0, 3, 11, 13]
@@ -99,7 +98,7 @@ plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020");
 
 O gráfico está esquisito entre 24 de Janeiro e 1 de Fevereiro. Olhando para a coluna `locations`, temos os nomes de regiões e países. Mas só as primeiras linhas tem dados na primeira coluna (nomes de província na China). Vamos então agrupar os dados da China numa única linha, usando [numpy.sum](https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum) para somar todas a linhas selecionadas (`axis=0`):
 
-```python
+```{code-cell}
 china_total = nbcases[locations[:, 1] == 'China'].sum(axis=0)
 china_total
 ```
@@ -109,20 +108,20 @@ Mas tem algo errado: não é pra termos dados negativos...
 
 ## Dados ausentes
 
-```python
+```{code-cell}
 nbcases
 ```
 
 Os `-1` são causados pela tentativa da `numpy.genfromtxt` de ler dados ausentes do arquivo `.csv` original. 
 
-```python
+```{code-cell}
 from numpy import ma
 nbcases_ma = ma.masked_values(nbcases, -1)
 ```
 
 Agora:
 
-```python
+```{code-cell}
 nbcases_ma
 ```
 
@@ -131,27 +130,27 @@ Cuidado: o atributo `mask` tem valor `True` em elementos com valores **inválido
 
 Vamos excluir a primeira linha (dados da província de Hubei na China):
 
-```python
+```{code-cell}
 plt.plot(dates, nbcases_ma[1:].T, '--');
 plt.xticks(selected_dates, dates[selected_dates]);
 plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020");
 ```
 
-```python
+```{code-cell}
 china_masked = nbcases_ma[locations[:, 1] == 'China'].sum(axis=0)
 china_masked
 ```
 
 Note que `china_masked` é uma array com máscara e para acessar seus dados precisamos usar o atributo `.data`:
 
-```python
+```{code-cell}
 china_total = china_masked.data
 china_total
 ```
 
 Pronto, não temos mais valores negativos. Mas ainda tem algo estranho: mas o número acumulado de casos não poderia diminuir de um dia pro outro (de 835 pra 10, por exemplo). Olhando pros dados, vemos que no período em que tínhamos dados ausentes pra China, tínhamos dados válidos pra Hong Kong, Taiwan, Macau e regiões "Unspecified". 
 
-```python
+```{code-cell}
 china_mask = ((locations[:, 1] == 'China') &
               (locations[:, 0] != 'Hong Kong') &
               (locations[:, 0] != 'Taiwan') &
@@ -161,20 +160,20 @@ china_mask = ((locations[:, 1] == 'China') &
 
 Observe que `china_mask` é um array de valores booleanos (`True` ou `False`); podemos verificar que os índices são como queríamos usando o método [ma.nonzero](https://numpy.org/devdocs/reference/generated/numpy.ma.nonzero.html#numpy.ma.nonzero):
 
-```python
+```{code-cell}
 china_mask.nonzero()
 ```
 
 Pronto:
 
-```python
+```{code-cell}
 china_total = nbcases_ma[china_mask].sum(axis=0)
 china_total
 ```
 
 Substituindo esses dados, temos:
 
-```python
+```{code-cell}
 fig = plt.figure()
 plt.plot(dates, china_total.T, '--');
 plt.xticks(selected_dates, dates[selected_dates]);
@@ -185,7 +184,7 @@ plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China"
 
 Uma possibilidade seria interpolar os dados ausentes para estimar o número de casos no final de janeiro. 
 
-```python
+```{code-cell}
 china_total.mask
 invalid = china_total[china_total.mask]
 invalid
@@ -193,20 +192,20 @@ invalid
 
 Podemos acessar os valores válidos usando o operador de negação:
 
-```python
+```{code-cell}
 valid = china_total[~china_total.mask]
 valid
 ```
 
 Agora, para criar uma aproximação simples para estes dados, devemos levar em conta as entradas válidas perto das inválidas. Vamos selecionar as datas em que os dados são válidos; observe que podemos usar a máscara do array `china_total` também no array de datas:
 
-```python
+```{code-cell}
 dates[~china_total.mask]
 ```
 
 Finalmente, vamos usar [numpy.polyfit](https://numpy.org/devdocs/reference/generated/numpy.polyfit.html#numpy.polyfit) e [numpy.polyval](https://numpy.org/devdocs/reference/generated/numpy.polyval.html#numpy.polyval) para criar um polinômio cúbico que faz um ajuste dos dados:
 
-```python
+```{code-cell}
 t = np.arange(len(china_total))
 params = np.polyfit(t[~china_total.mask], valid, 3)
 cubic_fit = np.polyval(params, t)
@@ -217,7 +216,7 @@ plt.plot(t, cubic_fit, '--');
 
 Melhorando o gráfico:
 
-```python
+```{code-cell}
 plt.plot(t, china_total);
 plt.plot(t[china_total.mask], cubic_fit[china_total.mask], '--', color='orange');
 plt.plot(7, np.polyval(params, 7), 'r*');
@@ -237,6 +236,3 @@ plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\
 
 [Ir para o notebook Queimadas](05-Exemplo_Queimadas.md)
 
-```python
-
-```

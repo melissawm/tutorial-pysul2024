@@ -1,18 +1,16 @@
 ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
 
-```python
+```{code-cell}
 from IPython.display import Image
 Image(url="https://matplotlib.org/_static/logo2_compressed.svg", width=600)
 ```
@@ -24,7 +22,7 @@ Image(url="https://matplotlib.org/_static/logo2_compressed.svg", width=600)
 - Hoje, possui sua própria API orientada a objetos.
 <!-- #endregion -->
 
-```python
+```{code-cell}
 %matplotlib widget
 ```
 
@@ -32,31 +30,31 @@ Image(url="https://matplotlib.org/_static/logo2_compressed.svg", width=600)
 ## O módulo `pyplot`
 <!-- #endregion -->
 
-```python
+```{code-cell}
 import matplotlib.pyplot as plt
 ```
 
-```python
+```{code-cell}
 print(plt.__doc__)
 ```
 
 ### Exemplo 1
 
-```python
+```{code-cell}
 import numpy as np
 t = np.arange(-5, 5, 0.1)
 ```
 
-```python
+```{code-cell}
 plt.plot(t, t**2);
 ```
 
-```python
+```{code-cell}
 plt.plot(t, t**2, 'r*')
 plt.close()
 ```
 
-```python
+```{code-cell}
 plt.plot(t, t**2, linewidth=3)
 plt.show()
 ```
@@ -65,36 +63,36 @@ plt.show()
 ## Outra maneira: API Orientada a objetos
 <!-- #endregion -->
 
-```python
+```{code-cell}
 fig, ax = plt.subplots()
 ax.plot(t, t**2, 'r*')
 ```
 
-```python
+```{code-cell}
 ax.plot(t, t**2, linewidth=3)
 ```
 
-```python
+```{code-cell}
 fig2, ax2 = plt.subplots()
 ax2.plot(t, t**2, 'm--');
 ```
 
 ## Customização
 
-```python
+```{code-cell}
 fig, ax = plt.subplots()
 ax.plot(t, t**2, 'm--');
 ```
 
-```python
+```{code-cell}
 fig
 ```
 
-```python
+```{code-cell}
 fig.clear()
 ```
 
-```python
+```{code-cell}
 fig.set_facecolor('black')
 ```
 
@@ -106,7 +104,7 @@ https://matplotlib.org/search.html?q=boxplot
 
 ## Exemplo 3D
 
-```python
+```{code-cell}
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -138,7 +136,7 @@ plt.show()
 - https://matplotlib.org/tutorials/introductory/usage.html
 - https://matplotlib.org/tutorials/introductory/usage.html#parts-of-a-figure
 
-```python
+```{code-cell}
 Image(url="https://matplotlib.org/_images/anatomy.png")
 ```
 
@@ -153,6 +151,3 @@ Image(url="https://matplotlib.org/_images/anatomy.png")
 
 [Ir para o notebook Queimadas](05-Exemplo_Queimadas.md)
 
-```python
-
-```
