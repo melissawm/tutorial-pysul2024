@@ -1,35 +1,40 @@
 ---
 jupytext:
   formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
     name: python3
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.4
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
 ---
 
-# Queimadas
+# Análise de dados de queimadas no Brasil
 
-
-Dados do INPE: http://queimadas.dgi.inpe.br/queimadas/bdqueimadas/
+Dados do INPE: https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/
 
 Dados da NASA: https://firms.modaps.eosdis.nasa.gov/
 
-```{code-cell}
+```{code-cell} ipython3
 !ls
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 zipfile_inpe = "dados/Focos_BDQueimadas.zip"
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 from zipfile import ZipFile
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 with ZipFile(zipfile_inpe, 'r') as zip: 
     zip.printdir() 
     print(f'Extracting file {zipfile_inpe} now...') 
@@ -37,55 +42,69 @@ with ZipFile(zipfile_inpe, 'r') as zip:
     print('Done!')
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 !ls dados
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 import os
-csv_inpe = os.path.join("dados", "Focos_2020-07-01_2020-09-30.csv")
+csv_inpe = os.path.join("dados", "focos_qmd_inpe_2024-07-01_2024-09-01_12.910553.csv")
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 with open(csv_inpe, 'r') as f:
     data = f.readlines()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 print(data[0:10])
 ```
 
-```{code-cell}
+## Pandas
+
+```{code-cell} ipython3
 import pandas as pd
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 with open(csv_inpe, 'r') as f:
     df = pd.read_csv(f)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 df
 ```
 
-```{code-cell}
-df = df[df['riscofogo']!=0.0]
+```{code-cell} ipython3
+pd.isnull(df['RiscoFogo'])
 ```
 
-```{code-cell}
-df['satelite'].unique()
+```{code-cell} ipython3
+df = df[~pd.isnull(df['RiscoFogo'])]
 ```
 
-```{code-cell}
-df = df[df['satelite']=='TERRA_M-M']
+```{code-cell} ipython3
+df = df[df['RiscoFogo']!=0]
 ```
 
-```{code-cell}
-del df['satelite']
-del df['pais']
+```{code-cell} ipython3
+df
 ```
 
-```{code-cell}
+```{code-cell} ipython3
+df['Satelite'].unique()
+```
+
+```{code-cell} ipython3
+#df = df[df['satelite']=='TERRA_M-M']
+```
+
+```{code-cell} ipython3
+del df['Satelite']
+del df['Pais']
+```
+
+```{code-cell} ipython3
 df
 ```
 
@@ -95,7 +114,11 @@ Risco de Queima: http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/pergu
 
 Monografia: https://monografias.ufrn.br/jspui/bitstream/123456789/9704/1/tcc_dias_alexandre_henrique.pdf
 
-```{code-cell}
+```{code-cell} ipython3
+# !pip install ipyleaflet
+```
+
+```{code-cell} ipython3
 %matplotlib widget
 from ipyleaflet import Map, Marker, CircleMarker
 
@@ -109,15 +132,15 @@ m = Map(center=center, zoom=3)
 display(m)
 ```
 
-```{code-cell}
-frp_notnull = df[df['frp'].notnull()]
-frp_notnull = frp_notnull.loc[frp_notnull['datahora'].str.contains('2020/09/30')]
+```{code-cell} ipython3
+frp_notnull = df[df['FRP'].notnull()]
+frp_notnull = frp_notnull.loc[frp_notnull['DataHora'].str.contains('2024/08/30')]
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 for index, row in frp_notnull.iterrows():
-    lat = row['latitude']
-    lon = row['longitude']
+    lat = row['Latitude']
+    lon = row['Longitude']
     circle_marker = CircleMarker()
     circle_marker.location = (lat, lon)
     circle_marker.radius = 1
@@ -130,42 +153,42 @@ for index, row in frp_notnull.iterrows():
 - para uma mesma cidade, pegar o risco em função do tempo
 - para um grupo de cidades plotar o risco em um mesmo gráfico
 
-```{code-cell}
-lista_municipios = df['municipio'].unique()
+```{code-cell} ipython3
+lista_municipios = df['Municipio'].unique()
 type(lista_municipios), len(lista_municipios)
 ```
 
-```{code-cell}
-corumba = df[df['municipio'] == "CORUMBA"]
-corumba
+```{code-cell} ipython3
+pv = df[df['Municipio'] == "PORTO VELHO"]
+pv
 ```
 
-```{code-cell}
-riscofogo = corumba['riscofogo']
-diasemchuva = corumba['diasemchuva']
+```{code-cell} ipython3
+riscofogo = pv['RiscoFogo']
+diasemchuva = pv['DiaSemChuva']
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 import numpy as np
-corumba = corumba.replace(-999, np.nan)
+pv = pv.replace(-999, np.nan)
 ```
 
-```{code-cell}
-agrupado = corumba.groupby('datahora').mean()
+```{code-cell} ipython3
+agrupado = pv.groupby('DataHora').mean()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 agrupado
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 datas = list(agrupado.index)
 datas = [item[0:10] for item in datas]
 datas
 len(datas)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots(2, 1, figsize=(8, 6))
@@ -183,7 +206,7 @@ ax[1].set_xticklabels(datas[::10], rotation=30)
 fig.tight_layout()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 fig, ax = plt.subplots(figsize=(8, 4))
 
 ax.plot(agrupado['riscofogo'], 'r')
@@ -207,4 +230,3 @@ fig.tight_layout()
 [Voltar ao notebook principal](00-Tutorial_Python_Sul_2024.md)
 
 [Ir para o notebook SciPy](06-Tutorial_SciPy.md)
-

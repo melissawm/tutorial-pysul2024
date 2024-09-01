@@ -72,11 +72,11 @@ Vamos explorar os dados deste arquivo para os primeiros 14 dias de registros. Pa
 
 ```{code-cell} ipython3
 # Vamos usar skip_header e usecols para ler apenas um pedaço do arquivo.
-dates = np.genfromtxt(filename, dtype=np.unicode_, delimiter=",",
+dates = np.genfromtxt(filename, dtype=np.str_, delimiter=",",
                       max_rows=1, usecols=range(3, 17),
                       encoding="utf-8-sig")
 
-locations = np.genfromtxt(filename, dtype=np.unicode_, delimiter=",",
+locations = np.genfromtxt(filename, dtype=np.str_, delimiter=",",
                           skip_header=7, usecols=(0, 1),
                           encoding="utf-8-sig")
 

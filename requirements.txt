@@ -6,3 +6,4 @@ pandas
 ipympl
 jupyterlab
 jupytext
+ipyleaflet
