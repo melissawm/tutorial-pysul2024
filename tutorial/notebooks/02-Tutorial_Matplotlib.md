@@ -1,18 +1,24 @@
 ---
 jupytext:
   formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
     name: python3
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.4
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
 ---
 
-```{code-cell}
+```{code-cell} ipython3
 from IPython.display import Image
-Image(url="https://matplotlib.org/_static/logo2_compressed.svg", width=600)
+Image(url="https://matplotlib.org/_static/logo_light.svg")
 ```
 
 <!-- #region tags=["chapter"] -->
@@ -22,89 +28,92 @@ Image(url="https://matplotlib.org/_static/logo2_compressed.svg", width=600)
 - Hoje, possui sua própria API orientada a objetos.
 <!-- #endregion -->
 
-```{code-cell}
++++
+
+Para trabalhar com o Matplotlib em notebooks Jupyter, podemos escolher o [backend interativo](https://matplotlib.org/stable/users/explain/figure/backends.html#interactive-backends) desejado:
+
+```{code-cell} ipython3
 %matplotlib widget
 ```
 
-<!-- #region tags=["section"] -->
-## O módulo `pyplot`
-<!-- #endregion -->
+## Interfaces: implícita (`matplotlib.pyplot`) e orientada a objetos
 
-```{code-cell}
++++
+
+Por razões históricas, o Matplotlib implementa uma interface explícita para acesso às funções de criações de gráficos - o módulo `pyplot`.
+
++++
+
+### Exemplo
+
+```{code-cell} ipython3
 import matplotlib.pyplot as plt
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 print(plt.__doc__)
 ```
 
 ### Exemplo 1
 
-```{code-cell}
+```{code-cell} ipython3
 import numpy as np
 t = np.arange(-5, 5, 0.1)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 plt.plot(t, t**2);
 ```
 
-```{code-cell}
-plt.plot(t, t**2, 'r*')
-plt.close()
-```
+### API Orientada a objetos (recomendada)
 
-```{code-cell}
-plt.plot(t, t**2, linewidth=3)
-plt.show()
-```
++++
 
-<!-- #region tags=["section"] -->
-## Outra maneira: API Orientada a objetos
-<!-- #endregion -->
+A maneira moderna e recomendade de criar gráficos com o Matplotlib é através da API orientada a objetos. (Leia mais em https://matplotlib.org/stable/users/explain/figure/api_interfaces.html)
 
-```{code-cell}
+```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.plot(t, t**2, 'r*')
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ax.plot(t, t**2, linewidth=3)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 fig2, ax2 = plt.subplots()
-ax2.plot(t, t**2, 'm--');
+ax2.plot(t, t**2, 'm--');  # Acrescente um ponto-e-vírgula ao final da 
+                           # linha para não imprimir uma mensagem
 ```
 
 ## Customização
 
-```{code-cell}
+```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.plot(t, t**2, 'm--');
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 fig
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 fig.clear()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 fig.set_facecolor('black')
 ```
 
 ## Exemplo boxplot
 
 
-https://matplotlib.org/search.html?q=boxplot
+https://matplotlib.org/stable/gallery/statistics/boxplot_demo.html
 
 
 ## Exemplo 3D
 
-```{code-cell}
+```{code-cell} ipython3
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -128,7 +137,6 @@ ax.zaxis.set_major_formatter("{x:.02f}")
 fig.colorbar(surf, shrink=0.5, aspect=5)
 
 plt.show()
-
 ```
 
 ## Guia do usuário: galeria e exemplos
@@ -136,18 +144,26 @@ plt.show()
 - https://matplotlib.org/tutorials/introductory/usage.html
 - https://matplotlib.org/tutorials/introductory/usage.html#parts-of-a-figure
 
-```{code-cell}
+```{code-cell} ipython3
 Image(url="https://matplotlib.org/_images/anatomy.png")
 ```
 
----
+## Documentação oficial
 
++++
 
-[Voltar ao notebook principal](00-Tutorial_Python_Sul_2024.md)
+Além de tutorials e guias de usuário, a Matplotlib também mantém uma galeria de exemplos bastante completa:
 
-[Ir para o notebook Masked Arrays](03-Exemplo_Masked_Arrays.md)
+https://matplotlib.org/stable/gallery/index.html
 
-[Ir para o notebook SVD](04-Exemplo_SVD.md)
+```{code-cell} ipython3
+from IPython.display import IFrame
+```
 
-[Ir para o notebook Queimadas](05-Exemplo_Queimadas.md)
+```{code-cell} ipython3
+IFrame("https://matplotlib.org/stable/gallery/index.html", width="100%", height=600)
+```
 
+```{code-cell} ipython3
+
+```
