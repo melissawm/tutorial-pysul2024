@@ -11,8 +11,7 @@ parts:
     chapters:
     - file: notebooks/01-Tutorial_NumPy.md
     - file: notebooks/02-Tutorial_Matplotlib.md
-    - file: notebooks/03-Exemplo_Masked_Arrays.md
+    - file: notebooks/03-Tutorial_SciPy.md
     - file: notebooks/04-Exemplo_SVD.md
     - file: notebooks/05-Exemplo_Queimadas.md
-    - file: notebooks/06-Tutorial_SciPy.md
-    - file: notebooks/07-Exemplo_Regressao.md
+    - file: notebooks/0x-Exemplo_Masked_Arrays.md

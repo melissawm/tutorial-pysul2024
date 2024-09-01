@@ -1,13 +1,19 @@
 ---
 jupytext:
   formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
     name: python3
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.4
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
 ---
 
 # O Ecossistema Científico no Python
@@ -29,20 +35,20 @@ import matplotlib as mpl
 - Conceitos básicos e quando usar essas bibliotecas
 - Onde buscar ajuda
 
-```{code-cell}
+```{code-cell} ipython3
 from IPython.display import Image
 Image(url="https://i.imgur.com/MBQqSmT.jpg", width=600)
 ```
 
 ### Computação Científica
 
-```{code-cell}
+```{code-cell} ipython3
 Image("imagens/comp_cientifica.png", width=600)
 ```
 
 Na prática...
 
-```{code-cell}
+```{code-cell} ipython3
 Image("imagens/comp_cientifica_2.png", width=600)
 ```
 
@@ -52,7 +58,7 @@ Image("imagens/comp_cientifica_2.png", width=600)
 
 ### O que é o ecossistema científico do Python? Quem mora nele?
 
-```{code-cell}
+```{code-cell} ipython3
 Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-020-2649-2/MediaObjects/41586_2020_2649_Fig2_HTML.png", width=600)
 ```
 
@@ -98,12 +104,12 @@ Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.
 
 - [Parte 1. NumPy](01-Tutorial_NumPy.md)
 - [Parte 2. Matplotlib](02-Tutorial_Matplotlib.md)
-- Parte 3. Exemplos práticos
-    - [Arrays com máscara (masked arrays)](03-Exemplo_Masked_Arrays.md)
+- [Parte 3. SciPy](03-Tutorial_SciPy.md)
+- Parte 4. Exemplos práticos
     - [Aproximação de imagens usando a SVD](04-Exemplo_SVD.md)
     - [Queimadas](05-Exemplo_Queimadas.md)
-- [Parte 4. SciPy](06-Tutorial_SciPy.md)
-    - [Regressão](07-Exemplo_Regressao.md)
+- Exemplos extra
+    - [Arrays com máscara (masked arrays)](0x-Exemplo_Masked_Arrays.md)
 
 ---
 
@@ -132,3 +138,6 @@ Algumas referências interessantes e caminhos para mais informações além da d
 
 `@melissawm`
 
+```{code-cell} ipython3
+
+```
