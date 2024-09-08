@@ -16,7 +16,7 @@ kernelspec:
   name: python3
 ---
 
-# Tutorial: Álgebra Linear em arrays n-dimensionais
+# Exemplo: Álgebra Linear em arrays n-dimensionais
 
 
 *(baseado no tutorial [Linear algebra on n-dimensional arrays](https://numpy.org/doc/stable/user/tutorial-svd.html) da documentação oficial da NumPy)*

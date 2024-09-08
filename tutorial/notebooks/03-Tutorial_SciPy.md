@@ -22,7 +22,7 @@ Image(url="https://scipy.org/images/logo.svg", width=200)
 ```
 
 <!-- #region tags=["chapter"] -->
-# SciPy 
+# SciPy: algoritmos para computação científica
 
 A SciPy é um conjunto de bibliotecas para computação científica, incluindo:
 - integração numérica

@@ -16,7 +16,7 @@ kernelspec:
   name: python3
 ---
 
-# Análise de dados de queimadas no Brasil
+# Exemplo: Análise de dados de queimadas no Brasil
 
 Esse notebook analisa e mostra no mapa dados sobre queimadas no Brasil.
 
