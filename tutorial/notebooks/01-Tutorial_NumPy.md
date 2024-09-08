@@ -845,11 +845,6 @@ np.isnan(np.nan)
 ```
 
 ```{code-cell} ipython3
----
-editable: true
-slideshow:
-  slide_type: ''
----
 np.True_?
 ```
 
