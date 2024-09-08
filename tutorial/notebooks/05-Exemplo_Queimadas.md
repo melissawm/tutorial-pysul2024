@@ -271,6 +271,8 @@ diasemchuva
 O objeto `Series` é uma array unidimensional com rótulos, capaz de conter qualquer tipo de dados:
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 diasemchuva[0]
 ```
 
