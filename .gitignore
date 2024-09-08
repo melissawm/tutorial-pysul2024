@@ -1,5 +1,5 @@
 # Execution outputs
-tutorial/notebooks/dados/Focos_2020-07-01_2020-09-30.csv
+tutorial/notebooks/dados/focos*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -72,7 +72,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-book/_build/
+tutorial/_build/
 
 # PyBuilder
 .pybuilder/

@@ -217,16 +217,16 @@ np.info(np.dot)
 np.dot?
 ```
 
----
-
-
 ❓❓
 - [Código fonte da função `np.dot`](https://github.com/numpy/numpy/blob/main/numpy/_core/multiarray.py#L754)
 - [Agora de verdade](https://github.com/numpy/numpy/blob/main/numpy/_core/src/multiarray/methods.c#L2417)
 - [For realz](https://github.com/numpy/numpy/blob/main/numpy/_core/src/multiarray/multiarraymodule.c#L983)
 
++++
 
-### Cuidado!
+#### Cuidado!
+
+Algumas funções da biblioteca padrão estão reimplementadas na NumPy com funcionalidade ligeiramente diferente. Nunca use `from numpy import *`!
 
 ```{code-cell} ipython3
 sum?
@@ -246,7 +246,7 @@ np.sum?
 ```
 
 ```{code-cell} ipython3
-%reset
+%reset -f
 ```
 
 ```{code-cell} ipython3
@@ -256,7 +256,7 @@ import numpy as np
 ---
 
 
-#### Vetorização: Exemplo 2
+### Vetorização: Exemplo 2
 
 ```{code-cell} ipython3
 A = np.array([[1, 2, 3, 4],
@@ -340,6 +340,7 @@ v
 
 [Documentação para ndarray.base](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.base.html)
 
++++
 
 #### ❓ (O que são essas dimensões?)
 
@@ -350,8 +351,9 @@ Image(url="https://fgnt.github.io/python_crashkurs_doc/_images/numpy_array_t.png
 
 *[Fonte: Elegant SciPy](https://www.oreilly.com/library/view/elegant-scipy/9781491922927/ch01.html)*
 
++++
 
-#### Vetorização: Exemplo 3
+### Vetorização: Exemplo 3
 
 ```{code-cell} ipython3
 A[0, :]  
@@ -383,9 +385,90 @@ Novamente:
 Image(url="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-020-2649-2/MediaObjects/41586_2020_2649_Fig1_HTML.png", width=600)
 ```
 
-<!-- #region tags=["section"] -->
-### Broadcasting
-<!-- #endregion -->
+---
+
++++
+
+## Indexação básica e avançada (Fancy indexing)
+
+```{code-cell} ipython3
+x = np.arange(10)
+x[2:5]
+```
+
+```{code-cell} ipython3
+x[:-7]
+```
+
+```{code-cell} ipython3
+x[1:7:2]
+```
+
+```{code-cell} ipython3
+y = np.arange(35).reshape(5,7)
+y[1:5:2,::3]
+```
+
+As arrays do NumPy podem ser indexadas por outras arrays (ou qualquer outro objeto tipo-sequência que possa ser convertido para uma array, como listas, com a exceção de tuplas). No entanto, isso pode não ser tão eficiente pois ativa o [indiciamento avançado](https://numpy.org/devdocs/reference/arrays.indexing.html#advanced-indexing).
+
+```{code-cell} ipython3
+x = np.arange(10,1,-1)
+```
+
+```{code-cell} ipython3
+x[np.array([3,3,-3,8])]
+```
+
+```{code-cell} ipython3
+x[np.array([[1,1],[2,3]])]
+```
+
+Também podemos usar máscaras booleanas:
+
+```{code-cell} ipython3
+b = y>20
+```
+
+```{code-cell} ipython3
+y[b]
+```
+
+```{code-cell} ipython3
+x = np.arange(30).reshape(2,3,5)
+```
+
+```{code-cell} ipython3
+b = np.array([[True, True, False], [False, True, True]])
+x[b]
+```
+
+```{code-cell} ipython3
+x = np.arange(5)
+x[:,np.newaxis] + x[np.newaxis,:]
+```
+
+```{code-cell} ipython3
+z = np.arange(81).reshape(3,3,3,3)
+z[1,...,2]
+```
+
+```{code-cell} ipython3
+z[1,:,:,2]
+```
+
+```{code-cell} ipython3
+x = np.arange(0, 10*np.pi, np.pi)
+```
+
+```{code-cell} ipython3
+np.sin(x) == 0
+```
+
+```{code-cell} ipython3
+np.allclose(np.sin(x), np.zeros(np.shape(x)))
+```
+
+## Broadcasting
 
 Permite fazer operações vetoriais de maneira generalizada.
 
@@ -415,7 +498,7 @@ A+x
 np.add?
 ```
 
-### 📒 Exercícios 
+## 📒 Exercícios 
 
 
 Como determinar a dieta mais econômica que satisfaz os requerimentos nutricionais básicos para boa saúde? Vamos supor que queremos fazer nossa compra semanal no supermercado: leite, miojo e café. Atualmente, os preços são:
@@ -431,13 +514,15 @@ Vamos nos preocupar com 4 ingredientes nutricionais básicos: proteína, carboid
 |Miojo (100g)  | 63,6g        | 10,0g     | 15,5g   |
 |Leite (100ml) | 4,66g        | 3,32g     | 3,35g   |
 
++++
 
-#### Exercício 1
+### Exercício 1
 
 Use uma ndarray `a` bidimensional que armazene, na posição $(i, j)$, a quantidade de gramas do nutriente $i$ contidas em cada grama do alimento $j$.
 
++++
 
-#### Solução 1
+### Solução 1
 
 ```{code-cell} ipython3
 tabela = np.zeros((3, 2))
@@ -471,7 +556,7 @@ tabela[:, 1] = leite
 tabela
 ```
 
-#### Solução 2
+### Solução 2
 
 ```{code-cell} ipython3
 miojo = np.array([63.6, 10, 15.5])
@@ -486,7 +571,7 @@ tabela = np.vstack([miojo, leite]).T/100
 tabela
 ```
 
-#### Solução 3
+### Solução 3
 
 ```{code-cell} ipython3
 tabela = np.stack([miojo, leite], axis=1)/100
@@ -496,7 +581,7 @@ tabela = np.stack([miojo, leite], axis=1)/100
 tabela
 ```
 
-#### Exercício 2
+### Exercício 2
 
 
 A partir da array `a` criada acima, extraia um array que contenha os valores de nutriente por alimento.
@@ -511,7 +596,7 @@ gordura = tabela[2, :]
 carbs.shape, proteina.shape, gordura.shape
 ```
 
-#### Exercício 3
+### Exercício 3
 
 
 Calcule o preço de uma compra incluindo 2 litros de leite, 1 pacote de café e 5 pacotes de miojo.
@@ -570,7 +655,7 @@ custo(np.array([10, 8, 2]))
 
 +++
 
-### Criação de arrays
+## Criação de arrays
 
 +++
 
@@ -747,92 +832,38 @@ np.finfo(np.float64).max+1.e308
 
 Leia mais na documentação oficial do Python (https://docs.python.org/pt-br/3/tutorial/floatingpoint.html) e na documentação sobre dtypes da NumPy (https://numpy.org/doc/stable/reference/arrays.dtypes.html)
 
-```{code-cell} ipython3
-x = np.arange(0, 10*np.pi, np.pi)
-```
-
-```{code-cell} ipython3
-np.sin(x) == 0
-```
-
-```{code-cell} ipython3
-np.allclose(np.sin(x), np.zeros(np.shape(x)))
-```
-
----
-
-
-### Basic Indexing, Advanced (Fancy) Indexing
-
-```{code-cell} ipython3
-x = np.arange(10)
-x[2:5]
-```
-
-```{code-cell} ipython3
-x[:-7]
-```
-
-```{code-cell} ipython3
-x[1:7:2]
-```
-
-```{code-cell} ipython3
-y = np.arange(35).reshape(5,7)
-y[1:5:2,::3]
-```
-
-As arrays do NumPy podem ser indexadas por outras arrays (ou qualquer outro objeto tipo-sequência que possa ser convertido para uma array, como listas, com a exceção de tuplas). No entanto, isso pode não ser tão eficiente pois ativa o [indiciamento avançado](https://numpy.org/devdocs/reference/arrays.indexing.html#advanced-indexing).
-
-```{code-cell} ipython3
-x = np.arange(10,1,-1)
-```
-
-```{code-cell} ipython3
-x[np.array([3,3,-3,8])]
-```
-
-```{code-cell} ipython3
-x[np.array([[1,1],[2,3]])]
-```
-
-Também podemos usar máscaras booleanas:
-
-```{code-cell} ipython3
-b = y>20
-```
-
-```{code-cell} ipython3
-y[b]
-```
-
-```{code-cell} ipython3
-x = np.arange(30).reshape(2,3,5)
-```
-
-```{code-cell} ipython3
-b = np.array([[True, True, False], [False, True, True]])
-x[b]
-```
-
-```{code-cell} ipython3
-x = np.arange(5)
-x[:,np.newaxis] + x[np.newaxis,:]
-```
-
-```{code-cell} ipython3
-z = np.arange(81).reshape(3,3,3,3)
-z[1,...,2]
-```
-
-```{code-cell} ipython3
-z[1,:,:,2]
-```
++++
 
 ### Gerenciamento de dados faltantes (NaN e _missing values_)
 
 ```{code-cell} ipython3
-ADICIONAR!
+np.nan
+```
+
+```{code-cell} ipython3
+np.isnan(np.nan)
+```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: ''
+---
+np.True_?
+```
+
+```{code-cell} ipython3
+np.nan == np.nan
+```
+
+```{code-cell} ipython3
+if np.isnan(np.nan):
+    print("True!")
+```
+
+```{code-cell} ipython3
+np.nansum(np.array([1, 2, 3, np.nan]))
 ```
 
 ### Exercícios
