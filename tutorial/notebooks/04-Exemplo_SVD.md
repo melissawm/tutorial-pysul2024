@@ -160,9 +160,8 @@ U.shape, s.shape, Vt.shape
 Note que `s` tem um shape diferente: só tem uma dimensão. Precisamos ter isso em mente pois operações voltadas para matrizes 2D podem não funcionar imediatamente. Por exemplo,
 
 ```{code-cell} ipython3
----
-tags: [raises-exception]
----
+:tags: [raises-exception]
+
 s @ Vt
 ```
 

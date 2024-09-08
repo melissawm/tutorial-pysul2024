@@ -253,18 +253,61 @@ pv = df[df['Municipio'] == "PORTO VELHO"]
 pv
 ```
 
+## O objeto pd.Series
+
 ```{code-cell} ipython3
 riscofogo = pv['RiscoFogo']
 diasemchuva = pv['DiaSemChuva']
 ```
 
 ```{code-cell} ipython3
-import numpy as np
-pv = pv.replace(-999, np.nan)
+type(diasemchuva)
 ```
 
 ```{code-cell} ipython3
-agrupado = pv.groupby('DataHora').mean()
+diasemchuva
+```
+
+O objeto `Series` é uma array unidimensional com rótulos, capaz de conter qualquer tipo de dados:
+
+```{code-cell} ipython3
+diasemchuva[0]
+```
+
+```{code-cell} ipython3
+diasemchuva[332]
+```
+
+```{code-cell} ipython3
+riscofogo.mean()
+```
+
+```{code-cell} ipython3
+diasemchuva.max()
+```
+
+```{code-cell} ipython3
+pv[pv['DiaSemChuva'] == 88.0]
+```
+
+---
+
++++
+
+## Risco de fogo em função do tempo para Porto Velho, RO
+
+```{code-cell} ipython3
+pv = pv[['DataHora', 'RiscoFogo', 'DiaSemChuva']].reset_index(drop=True)
+```
+
+```{code-cell} ipython3
+pv
+```
+
+Para cada grupo de entradas com o mesmo valor de `DataHora`, calcule a média dos valores de `RiscoFogo` e `DiaSemChuva`.
+
+```{code-cell} ipython3
+agrupado = pv.groupby(['DataHora'], as_index=False)[["RiscoFogo", "DiaSemChuva"]].mean()
 ```
 
 ```{code-cell} ipython3
@@ -272,7 +315,27 @@ agrupado
 ```
 
 ```{code-cell} ipython3
+pv[pv['DataHora']=='2024/08/22 01:52:00']
+```
+
+Surpresa! 🤡
+
+```{code-cell} ipython3
+pv = pv[pv['RiscoFogo']!=-999.0]
+```
+
+```{code-cell} ipython3
+agrupado = pv.groupby(['DataHora'])[["RiscoFogo", "DiaSemChuva"]].mean()
+agrupado
+```
+
+Veja https://pandas.pydata.org/docs/user_guide/groupby.html e https://pandas.pydata.org/docs/user_guide/10min.html#grouping.
+
+```{code-cell} ipython3
 datas = list(agrupado.index)
+```
+
+```{code-cell} ipython3
 datas = [item[0:10] for item in datas]
 datas
 len(datas)
@@ -282,8 +345,8 @@ len(datas)
 import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots(2, 1, figsize=(8, 6))
-ax[0].plot(agrupado['riscofogo'], 'r')
-ax[1].plot(agrupado['diasemchuva'], 'bo')
+ax[0].plot(agrupado['RiscoFogo'], 'r')
+ax[1].plot(agrupado['DiaSemChuva'], 'bo')
 
 # Preparar rótulos da primeira imagem
 ax[0].set_xticks(range(len(datas))[::10]);
@@ -299,11 +362,11 @@ fig.tight_layout()
 ```{code-cell} ipython3
 fig, ax = plt.subplots(figsize=(8, 4))
 
-ax.plot(agrupado['riscofogo'], 'r')
+ax.plot(agrupado['RiscoFogo'], 'r')
 plt.draw()
 
 ax2 = ax.twinx()  # instantiate a second axes that shares the same x-axis
-ax2.plot(agrupado['diasemchuva'], 'bo')
+ax2.plot(agrupado['DiaSemChuva'], 'bo')
 
 ax2.set_xticks(range(len(datas))[::10]);
 ax.set_xticklabels(datas[::10], rotation=30);
