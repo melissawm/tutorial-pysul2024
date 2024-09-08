@@ -18,9 +18,13 @@ kernelspec:
 
 # Análise de dados de queimadas no Brasil
 
-Dados do INPE: https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/
+Esse notebook analisa e mostra no mapa dados sobre queimadas no Brasil.
 
-Dados da NASA: https://firms.modaps.eosdis.nasa.gov/
+Vamos usar os dados do INPE, recuperados em https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/
+
+Os dados incluidos neste tutorial são referentes ao período de 01/07 até 01/09 de 2024.
+
+A NASA também fornece dados de queimadas: https://firms.modaps.eosdis.nasa.gov/
 
 ```{code-cell} ipython3
 !ls
@@ -48,7 +52,7 @@ with ZipFile(zipfile_inpe, 'r') as zip:
 
 ```{code-cell} ipython3
 import os
-csv_inpe = os.path.join("dados", "focos_qmd_inpe_2024-07-01_2024-09-01_12.910553.csv")
+csv_inpe = os.path.join("dados", "focos_qmd_inpe_2024-07-01_2024-09-01_58.414406.csv")
 ```
 
 ```{code-cell} ipython3
@@ -61,6 +65,10 @@ print(data[0:10])
 ```
 
 ## Pandas
+
++++
+
+Como nossos dados estão em formato de tabela, vamos usar a biblioteca [pandas](https://pydata.pandas.dev) para analisar os dados. O pandas fornece um tipo de dados chamado `DataFrame`, que permite tratar com facilidade dados em tabelas.
 
 ```{code-cell} ipython3
 import pandas as pd
@@ -75,12 +83,38 @@ with open(csv_inpe, 'r') as f:
 df
 ```
 
+(repare no número de linhas dessa tabela!)
+
++++
+
+Como queremos analisar dados de queimadas (representadas pelas linhas em que o valor de `RiscoFogo` é não-nulo) vamos eliminar as linhas que não nos interessam da tabela.
+
+Aqui, temos dois tipos de dados "nulos":
+- Linhas em que o valor de `RiscoFogo` é NaN (correspondente, provavelmente, a dados faltantes);
+- Linhas em que o valor de `RiscoFogo` é zero.
+
+Vamos eliminar ambos.
+
+```{code-cell} ipython3
+len(df[pd.isnull(df['RiscoFogo'])])
+```
+
 ```{code-cell} ipython3
 pd.isnull(df['RiscoFogo'])
 ```
 
+Para eliminarmos essas linhas, vamos usar um filtro booleano e criar uma nova tabela com apenas os valores em que estamos interessados.
+
 ```{code-cell} ipython3
 df = df[~pd.isnull(df['RiscoFogo'])]
+```
+
+```{code-cell} ipython3
+df
+```
+
+```{code-cell} ipython3
+df[df['RiscoFogo']==0]
 ```
 
 ```{code-cell} ipython3
@@ -91,13 +125,17 @@ df = df[df['RiscoFogo']!=0]
 df
 ```
 
+Agora, vamos filtrar por satélite:
+
 ```{code-cell} ipython3
 df['Satelite'].unique()
 ```
 
 ```{code-cell} ipython3
-#df = df[df['satelite']=='TERRA_M-M']
+df = df[df['Satelite']=='TERRA_M-M']
 ```
+
+Como todos os nossos dados são referentes ao Brasil e eliminamos os dados de outros satélites, podemos eliminar as colunas `Pais` e `Satelite` da tabela.
 
 ```{code-cell} ipython3
 del df['Satelite']
@@ -108,27 +146,53 @@ del df['Pais']
 df
 ```
 
-FRP: https://revistapesquisa.fapesp.br/como-monitorar-o-fogo/
+Note os índices da tabela; eles ainda retém as informações da tabela original. Para resetarmos os índices, caso isso não seja necessário, usamos:
 
-Risco de Queima: http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/perguntas-frequentes#p23
+```{code-cell} ipython3
+df.reset_index()
+```
 
-Monografia: https://monografias.ufrn.br/jspui/bitstream/123456789/9704/1/tcc_dias_alexandre_henrique.pdf
+e, para eliminar totalmente os índices antigos, usamos
+
+```{code-cell} ipython3
+df = df.reset_index(drop=True)
+```
+
+```{code-cell} ipython3
+df
+```
+
+**Nota:** Para saber mais sobre os valores dessa tabela, inclusive sobre como é calculado e o que significa o valor de `RiscoFogo` veja as referências abaixo:
+
+- FRP: https://revistapesquisa.fapesp.br/como-monitorar-o-fogo/
+- Risco de Queima: http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/perguntas-frequentes#p23
+- Monografia: https://monografias.ufrn.br/jspui/bitstream/123456789/9704/1/tcc_dias_alexandre_henrique.pdf
+
++++
+
+---
+
++++
+
+## Gráfico no mapa
+
++++
+
+Para fazermos não só um gráfico dos dados, mas sobrepor esses dados em um mapa, vamos usar a biblioteca `ipyleaflet`:
 
 ```{code-cell} ipython3
 # !pip install ipyleaflet
 ```
 
+Para começarmos, vamos criar um mapa e adicionar uma camada de marcadores que serão usados mais tarde para sinalizar as coordenadas com RiscoFogo positivo.
+
 ```{code-cell} ipython3
 %matplotlib widget
-from ipyleaflet import Map, Marker, CircleMarker
+from ipyleaflet import Map, CircleMarker
 
 center = (-11.7997134,-53.8335376)
 
 m = Map(center=center, zoom=3)
-
-#marker = Marker(location=center, draggable=True)
-#m.add_layer(marker);
-
 display(m)
 ```
 
@@ -149,6 +213,32 @@ for index, row in frp_notnull.iterrows():
     circle_marker.weight = 1
     m.add_layer(circle_marker)
 ```
+
+**Nota** Com uma instância regular do JupyterLab, você pode observar o seguinte erro ao executar o comando acima:
+
+```
+IOPub message rate exceeded.
+The Jupyter server will temporarily stop sending output
+to the client in order to avoid crashing it.
+To change this limit, set the config variable
+`--ServerApp.iopub_msg_rate_limit`.
+
+Current values:
+ServerApp.iopub_msg_rate_limit=1000.0 (msgs/sec)
+ServerApp.rate_limit_window=3.0 (secs)
+```
+
+Para resolver isso, você deve iniciar a instância do JupyterLab com o comando
+```
+jupyter lab --ServerApp.iopub_msg_rate_limit=10000
+```
+ou criar um arquivo de configurações usando o comando
+```
+jupyter notebook --generate-config
+```
+e alterar o valor dessa configuração no arquivo.
+
++++
 
 - para uma mesma cidade, pegar o risco em função do tempo
 - para um grupo de cidades plotar o risco em um mesmo gráfico

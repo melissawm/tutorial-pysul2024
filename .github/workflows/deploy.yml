@@ -21,7 +21,7 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Build the JupyterBook site
         run: |
-          jupyter-book build tutorial
+          JUPYTER_CONFIG_PATH=. jupyter-book build tutorial
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
