@@ -379,7 +379,3 @@ ax.set_ylabel('Risco fogo')
 ax2.set_ylabel('Dias sem chuva')
 fig.tight_layout()
 ```
-
-[Voltar ao notebook principal](00-Tutorial_Python_Sul_2024.md)
-
-[Ir para o notebook SciPy](06-Tutorial_SciPy.md)
