@@ -118,6 +118,7 @@ y = x + 5*np.random.rand(10) - 6*np.random.rand(10)
 f = interp1d(x, y)
 
 # Gráfico
+fig = plt.figure()
 t = np.linspace(0, 9, 50)
 plt.title('Exemplo: ajuste de curvas')
 plt.plot(x, y, 'r*')
