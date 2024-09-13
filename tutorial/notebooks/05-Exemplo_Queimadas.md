@@ -268,7 +268,7 @@ type(diasemchuva)
 diasemchuva
 ```
 
-O objeto `Series` é uma array unidimensional com rótulos, capaz de conter qualquer tipo de dados:
+O objeto `Series` é uma array unidimensional com rótulos, capaz de conter qualquer tipo de dados. Cuidado com os índices!
 
 ```{code-cell} ipython3
 :tags: [raises-exception]
@@ -376,7 +376,7 @@ ax.set_xticklabels(datas[::10], rotation=30);
 ax.legend(['Risco Fogo'], loc='upper left')
 ax2.legend(['Dias sem chuva'], loc='upper right')
 
-ax.set_title('Dados INPE sobre queimadas em Corumba, MS')
+ax.set_title('Dados INPE sobre queimadas em Porto Velho, RO')
 ax.set_ylabel('Risco fogo')
 ax2.set_ylabel('Dias sem chuva')
 fig.tight_layout()
