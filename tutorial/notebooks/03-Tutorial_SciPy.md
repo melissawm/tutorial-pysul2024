@@ -74,26 +74,25 @@ Encontre uma solução numérica para a equação diferencial com condição ini
 ```{code-cell} ipython3
 %matplotlib widget
 import numpy as np
-from scipy.integrate import odeint
+from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 
-# function that returns dy/dt
-def model(y,t):
-    dydt = -y + 1.0
-    return dydt
+def exponential_decay(t, y): return -0.5 * y
 
-# initial condition
-y0 = 0
+# solve_ivp(fun, t_span, y0)
+sol = solve_ivp(exponential_decay, [0, 10], [2, 4, 8])
 
-# time points
-t = np.linspace(0,5)
+print(sol.t)
+```
 
-# solve ODE
-y = odeint(model,y0,t)
+```{code-cell} ipython3
+print(sol.y)
+```
 
+```{code-cell} ipython3
 # plot results
 fig = plt.figure()
-plt.plot(t,y)
+plt.plot(sol.t, sol.y.T)
 plt.xlabel('time')
 plt.ylabel('y(t)')
 plt.show()
@@ -118,15 +117,14 @@ y = x + 5*np.random.rand(10) - 6*np.random.rand(10)
 f = interp1d(x, y)
 
 # Gráfico
-fig = plt.figure()
+fig, ax = plt.subplots()
 t = np.linspace(0, 9, 50)
-plt.title('Exemplo: ajuste de curvas')
-plt.plot(x, y, 'r*')
-plt.plot(t, a_linear*t+b_linear,'g')
-plt.plot(t, a_quad*t**2+b_quad*t+c_quad, 'm')
-plt.plot(t, f(t), 'b')
-plt.legend(['linear', 'quadrático', 'interpolação'])
-plt.show();
+ax.set_title('Exemplo: ajuste de curvas')
+ax.plot(x, y, 'r*')
+ax.plot(t, a_linear*t+b_linear,'g')
+ax.plot(t, a_quad*t**2+b_quad*t+c_quad, 'm')
+ax.plot(t, f(t), 'b')
+ax.legend(['linear', 'quadrático', 'interpolação'])
 ```
 
 ### Exemplo: Teste de hipótese estatística
